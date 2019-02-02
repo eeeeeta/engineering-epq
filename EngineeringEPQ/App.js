@@ -30,40 +30,16 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     var self = this;
-    this.state = {"steps": []};
+    this.state = {"steps": [], "heading": 0};
     var steps = this.state.steps;
     this.state.step_detector = new StepDetector();
-    this.state.step_detector.on_drop_found = function(diff) {
+    this.state.step_detector.on_drop_found = function(diff, hdg) {
       self.setState((prev) => {
-	console.log("updating?");
-	prev.steps.push(diff + " @ " + Date.now());
+	prev.heading = hdg;
+	prev.steps.push(hdg + "° " + diff.toFixed(2) + " m/s^2 @ " + Date.now());
 	return prev;
       });
     };
-    /*
-    var lpf = LPF;
-    LPF.init([]);
-    this.state = {"accel": {}, "zdata": [], "zdata_lpf": [], "lpf": LPF};
-    this.state.accel = {"x": 0, "y": 0, "z": 0};
-    this.state.smoothed   = 0;        // or some likely initial value
-    this.state.smoothing  = 10;       // or whatever is desired
-    this.state.lastUpdate = new Date;
-    var self = this;
-    setUpdateIntervalForType(SensorTypes.accelerometer, 10);
-    const subscription = accelerometer
-      .subscribe(({x, y, z, timestamp}) => {
-	self.setState(prev => {
-	  prev.accel.x = x;
-	  prev.accel.y = y;
-	  prev.accel.z = z;
-	  prev.zdata.push(smooth(prev.smoothed, prev.smoothing, prev.lastUpdate, z));
-	  if (prev.zdata.length > 40) {
-	    prev.zdata.shift();
-	  }
-	  return prev;
-	})
-      });
-      */
   }
   render() {
     var self = this;
@@ -80,6 +56,7 @@ export default class App extends Component {
     return (
       <ScrollView style={styles.container}>
       <Text style={styles.welcome}>EPQ Accelerometer Testing</Text>
+      <Text style={styles.welcome}>Heading: {self.state.heading}°</Text>
       <Button title="Clear steps" onPress={clearSteps} />
 
       <Text style={styles.instructions}>difference_accel: {self.state.step_detector.difference_accel} m/s^2</Text>
@@ -113,8 +90,6 @@ export default class App extends Component {
       minimumValue={0}
       value={this.state.step_detector.lpf.smoothing}
       onValueChange={function (val) { self.state.step_detector.lpf.smoothing = Math.min(1, val); self.forceUpdate(); }} />
-
-
 
       {steps}
       </ScrollView>

@@ -2,6 +2,7 @@
 //
 import {
   accelerometer,
+  magnetometer,
   gyroscope,
   setUpdateIntervalForType,
   SensorTypes
@@ -27,6 +28,7 @@ class StepDetector {
     self.readings = [];
     self.readings_length = 100;
     self.on_drop_found = function() {};
+    self.heading = 0;
 
     // Accelerometer setup
     setUpdateIntervalForType(SensorTypes.accelerometer, 33);
@@ -34,6 +36,19 @@ class StepDetector {
     accelerometer.subscribe(({x, y, z, timestamp}) => {
       self.on_data(x, y, z, Date.now());
     });
+    magnetometer.subscribe(({x, y, z}) => {
+      self.on_magnet_data(x, y, z);
+    });
+  }
+  on_magnet_data(x, y, z) {
+    let angle;
+    if (Math.atan2(y, x) >= 0) {
+      angle = Math.atan2(y, x) * (180 / Math.PI);
+    }
+    else {
+      angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
+    }
+    this.heading = Math.round(angle);
   }
   on_data(x, y, z, timestamp) {
     var self = this;
@@ -77,7 +92,7 @@ class StepDetector {
 	}
       }
       if (drop_found) {
-	self.on_drop_found(drop_diff);
+	self.on_drop_found(drop_diff, self.heading);
       }
     }
     else {
