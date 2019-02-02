@@ -1,0 +1,2233 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass extarticle
+\begin_preamble
+\usepackage{hyperref}
+\usepackage[strings]{underscore}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "Heuristica"
+\font_sans "default" "Cantarell"
+\font_typewriter "default" "Ubuntu Mono"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type numerical
+\biblio_style plain
+\biblio_options sorting=none
+\biblatex_bibstyle numeric
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 5
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Engineering EPQ - indoor navigation
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Research
+\end_layout
+
+\begin_layout Subsection
+Overview
+\end_layout
+
+\begin_layout Standard
+The Project Proposal Form (PPF) for this EPQ identified four main research
+ areas to be covered:
+\end_layout
+
+\begin_layout Itemize
+How to determine the user's current location inside a building (where GPS
+ and other methods are generally infeasible);
+\end_layout
+
+\begin_layout Itemize
+Which methods to use for A-B turn-by-turn navigation, based on the relative
+ efficiencies of each method;
+\end_layout
+
+\begin_layout Itemize
+How to provide accurate time estimation;
+\end_layout
+
+\begin_layout Itemize
+Which framework to use to develop mobile applications for iOS and Android.
+\end_layout
+
+\begin_layout Standard
+Over the course of the planned research time, each of these five PPF research
+ areas was explored, with the results summarized below.
+ 
+\end_layout
+
+\begin_layout Subsection
+Localization methods
+\end_layout
+
+\begin_layout Standard
+When investigating this area of research, it was helpful to investigate
+ what other methods had already been used to solve the problem of indoor
+ localization.
+ It immediately becomes apparent that GPS, the more 'standard' way to determine
+ a user's location, does not work very well indoors, at least using the
+ GPS receivers present in standard smartphones 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kjaergaard2010indoor"
+literal "false"
+
+\end_inset
+
+ - the cited paper states that 
+\begin_inset Quotes eld
+\end_inset
+
+it has been a fact that GPS performs too poorly inside buildings to provide
+ usable indoor positioning
+\begin_inset Quotes erd
+\end_inset
+
+, showing examples of how it can be made to work 
+\begin_inset Quotes eld
+\end_inset
+
+using state-of-the-art receivers
+\begin_inset Quotes erd
+\end_inset
+
+, although agreeing that 
+\begin_inset Quotes eld
+\end_inset
+
+receivers embedded in mobile phones...provided considerably lower availability,
+ lower accuracy, and longer time to first fix
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Indeed, a quick verification of this fact using the GPS receiver in my
+ personal smartphone whilst indoors reveals utterly unworkable performance,
+ with zero satellites identified even after one minute of searching.
+ Therefore, other methods for indoor localization were investigated, as
+ GPS seemed unlikely to work.
+\end_layout
+
+\begin_layout Standard
+Many researchers aimed to provide localization by adding beacons to the
+ environment, such as the Drishti indoor/outdoor system 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ran2004drishti"
+literal "false"
+
+\end_inset
+
+, which used an 
+\begin_inset Quotes eld
+\end_inset
+
+OEM ultrasound system
+\begin_inset Quotes erd
+\end_inset
+
+ to locate the user.
+ Another paper aimed to provide pedestrian indoor navigation by using RFID
+ tags embedded in various places around the environment, and by using a
+ sensor in the user's foot to scan them 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ruiz2012accurate"
+literal "false"
+
+\end_inset
+
+.
+ While these approaches are a valid way to perform indoor navigation, they
+ would not be useful in this particular case; the project aims to provide
+ indoor navigation in areas such as schools, where significant changes to
+ the environment cannot be made.
+ Adding beacons or equipment to the environment would defeat this purpose,
+ adding extra cost and complexity to the deployment of the system.
+ A more low-cost and less permanent approach may still be viable - for example,
+ one paper used posters stuck up on walls around the building with codes
+ for users to scan 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mulloni2009indoor"
+literal "false"
+
+\end_inset
+
+, which could still be useful for this project's purpose.
+\end_layout
+
+\begin_layout Standard
+However, there are other ways to perform localization that do not require
+ changes to the environment.
+ One paper 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2014building"
+literal "false"
+
+\end_inset
+
+ provided an example of a WiFi-based
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+WiFi may also be referred to as 'WLAN' throughout the course of this writeup.
+\end_layout
+
+\end_inset
+
+ localization system deployed at the COEX complex in Seoul, Korea in 2010.
+ Another paper proposed a system called FootPath 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "link2011footpath"
+literal "false"
+
+\end_inset
+
+, which purported to provide accurate indoor navigation using only the accelerom
+eter present in every smartphone.
+ In addition to these more established and researched techniques, new startup
+ companies such as Scape 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ScapeIo"
+literal "false"
+
+\end_inset
+
+ also provide inspiration in the form of 
+\begin_inset Quotes eld
+\end_inset
+
+hyper-accurate location powered by computer vision
+\begin_inset Quotes erd
+\end_inset
+
+ - i.e.
+ they use AI and computer vision technologies to determine location based
+ on landmarks, demonstrating that they have successfully developed this
+ technology for alpha access in London only.
+\end_layout
+
+\begin_layout Standard
+Based on these examples, more detailed research into specific methodologies
+ for indoor localization was conducted.
+\end_layout
+
+\begin_layout Subsubsection
+WiFi-based
+\end_layout
+
+\begin_layout Standard
+The COEX deployment 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2014building"
+literal "false"
+
+\end_inset
+
+ provides a good example of a complete Wi-Fi based navigation system that
+ had 
+\begin_inset Quotes eld
+\end_inset
+
+more than 200,000 users
+\begin_inset Quotes erd
+\end_inset
+
+ download the system in its first day of use.
+ The paper provides a good high-level overview of what technologies were
+ used (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:coex-overview"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+): performing an evaluation of access points in the area and design goals
+ (1, 2), drawing a map of the indoor area and determing fingerprint measurement
+ locations (3), WiFi Radio Map (WRM) construction (4), and system programming,
+ testing, and evaluation (5, 6, 7).
+ This provides a good structure that this project could potentially follow,
+ if WiFi-based navigation were to be used.
+ Indeed, this basic outline is corroborated by other research, with a paper
+ surveying WLAN fingerprinting methods 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "honkavirta2009comparative"
+literal "false"
+
+\end_inset
+
+ also stating that 
+\begin_inset Quotes eld
+\end_inset
+
+the location of the user is determined by comparing obtained RSSI values
+ to a radio map
+\begin_inset Quotes erd
+\end_inset
+
+, where the radio map consists of 
+\begin_inset Quotes eld
+\end_inset
+
+measured RSSI patterns at certain locations
+\begin_inset Quotes erd
+\end_inset
+
+ - a similar idea to what the COEX paper was suggesting, stating that 
+\begin_inset Quotes eld
+\end_inset
+
+collecting precise WiFi fingerprints at each marked measure point...[is] critical
+ for accurate localization
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename indoor_navigation_outline.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A diagrammatic representation of steps taken to create the COEX system.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:coex-overview"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2014building"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The COEX paper states that they 
+\begin_inset Quotes eld
+\end_inset
+
+adopted the k-weighted nearest neighbours (kWNN, k = 3) for [their] localization
+ engine
+\begin_inset Quotes erd
+\end_inset
+
+, as well as a 
+\begin_inset Quotes eld
+\end_inset
+
+signal filter, adaptive Kalman filter, and a delay filter
+\begin_inset Quotes erd
+\end_inset
+
+ in order to 
+\begin_inset Quotes eld
+\end_inset
+
+further improve accuracy
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Other papers also reference the 
+\begin_inset Quotes eld
+\end_inset
+
+k-weighted nearest neighbours
+\begin_inset Quotes erd
+\end_inset
+
+ approach, with a paper on indoor localization using FM radio signals 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "moghtadaiee2011indoor"
+literal "false"
+
+\end_inset
+
+ (which wasn't about WiFi specifically, but followed a similar methodology)
+ naming it as a possible methodology to use for positioning, while the comparati
+ve survey mentioned earlier 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "honkavirta2009comparative"
+literal "false"
+
+\end_inset
+
+ also featured an evaluation of the kWNN method.
+\end_layout
+
+\begin_layout Standard
+It therefore was apparent that the kWNN method would be a reasonable first
+ step when designing a WiFi-based localization system, especially given
+ its successful use in the COEX complex.
+ However, further research into potential WiFi-based localization methodologies
+ was not conducted; for reasons that will soon be explained, WiFi was determined
+ to be inferior for this product's usecase.
+\end_layout
+
+\begin_layout Subsubsection
+Accelerometer-based
+\end_layout
+
+\begin_layout Standard
+Although WiFi-based localization is a popular method for performing localization
+, it is not without its downsides (as will soon be explained).
+ An alternative method for performing indoor localization comes in the form
+ of accelerometer-based solutions, analzying the accelerometer and compass
+ present in every modern smartphone to figure out their relative movement
+ from a known starting point, or along a known path.
+\end_layout
+
+\begin_layout Standard
+A prominent example of this method was presented by Constandache et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "constandache2010towards"
+literal "false"
+
+\end_inset
+
+ in their paper 
+\begin_inset Quotes eld
+\end_inset
+
+Towards Mobile Phone Localization without War-Driving
+\begin_inset Quotes erd
+\end_inset
+
+, which, as suggested by the title, makes the case that war-driving (i.e.
+ performing a survey of WiFi access points in an area to construct a WiFi
+ radio map, as explained in the last section), is 
+\begin_inset Quotes eld
+\end_inset
+
+an expensive calibration operation
+\begin_inset Quotes erd
+\end_inset
+
+ that still leaves 
+\begin_inset Quotes eld
+\end_inset
+
+a large portion of space...uncovered
+\begin_inset Quotes erd
+\end_inset
+
+ in applications such as outdoor GPS-free localization.
+ Instead, they present a scheme called 
+\emph on
+CompAcc
+\emph default
+ that augments GPS with accelerometer data, 
+\begin_inset Quotes eld
+\end_inset
+
+matching the directional trail
+\begin_inset Quotes erd
+\end_inset
+
+ it can derive from the accelerometer 
+\begin_inset Quotes eld
+\end_inset
+
+with possible walking paths around the phone's known location
+\begin_inset Quotes erd
+\end_inset
+
+.
+ However, it acknowledges that 
+\begin_inset Quotes eld
+\end_inset
+
+in certain scenarios, the difference between the estimated and the actual
+ location can cause confusion
+\begin_inset Quotes erd
+\end_inset
+
+, especially since 
+\begin_inset Quotes eld
+\end_inset
+
+electronic compasses and accelerometers are highly noisy
+\begin_inset Quotes erd
+\end_inset
+
+, requiring the algorithm to fall back on AGPS for localization every now
+ and again to check that the error has not grown too large.
+\end_layout
+
+\begin_layout Standard
+Link et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "link2011footpath"
+literal "false"
+
+\end_inset
+
+ propose a possible extension of this methodology, promising to similarly
+ 
+\begin_inset Quotes eld
+\end_inset
+
+accurately localize a user on [their] route...using only the accelerometer
+ and compass readily available in modern smartphones
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Critically, this implementation does 
+\emph on
+not
+\emph default
+ provide for localization in general - they only 
+\begin_inset Quotes eld
+\end_inset
+
+solve the localization problem on a specified route
+\begin_inset Quotes erd
+\end_inset
+
+ - limiting the applicability of such a method, as it would not be harder
+ to dynamically reroute if the user strayed from the expected path.
+ The FootPath paper states that 
+\begin_inset Quotes eld
+\end_inset
+
+our path matching...is more robust by handling source to destination routes
+ in their entirety
+\begin_inset Quotes erd
+\end_inset
+
+ - presenting this characteristic as positive, and a possible cause of increased
+ accuracy, while the original CompAcc paper constantly re-evaluates the
+ user's possible route based on smaller route segments.
+\end_layout
+
+\begin_layout Standard
+An overview of the FootPath methodology is shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:footpath-overview"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (taken from the paper), which shows how the system obtains map material
+ (1) and takes input from the user (2) to determine the current position
+ and end position, and thus a route between the two.
+ Once this is determined, the system breaks the route down into individual
+ steps and uses accelerometer data to correlate the users' movement (4,
+ 5), so that the user is presented with a live map screen showing their
+ progress along the route (6).
+ The most interesting parts, for this project's usecase, are items (4) and
+ (5) - how to 
+\begin_inset Quotes eld
+\end_inset
+
+match [the user's] steps onto the map
+\begin_inset Quotes erd
+\end_inset
+
+, and how, indeed, to obtain step data from a phone's accelerometer.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename footpath_overview.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A diagrammatic overview of the FootPath system.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:footpath-overview"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "link2011footpath"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Step detection, according to the FootPath paper, can be done as 
+\begin_inset Quotes eld
+\end_inset
+
+accelerometer values...display a characteristic regular pattern
+\begin_inset Quotes erd
+\end_inset
+
+, stating that steps can be detected by 
+\begin_inset Quotes eld
+\end_inset
+
+apply[in]g a low pass filter
+\begin_inset Quotes erd
+\end_inset
+
+ and then detecting a step 
+\begin_inset Quotes eld
+\end_inset
+
+whenever the acceleration value falls by at least 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p = 2 
+\backslash
+frac{m}{s^2}$
+\end_layout
+
+\end_inset
+
+ within a window 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$w$
+\end_layout
+
+\end_inset
+
+ of 5 consecutive samples, or 165ms
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The CompAcc paper is unfortunately somewhat vaguer about how it accomplished
+ this, mentioning only 
+\begin_inset Quotes eld
+\end_inset
+
+a rhythmic acceleration-signature in human walking patterns
+\begin_inset Quotes erd
+\end_inset
+
+, but cautioning that 
+\begin_inset Quotes eld
+\end_inset
+
+several factors [relating to phone accelerometers] cause fluctuations in
+ [measured] acceleration, resulting in erroneous displacements
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The exemplary data provided in the FootPath paper (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:footpath-exemplary-data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), which correlated with the shape of the CompAcc data, as well as the fact
+ that the CompAcc paper cited an location accuracy of less than 11m, provided
+ some justification to show that step detection might indeed be possible
+ via these methods.
+ However, further testing during the design an implementation phase would
+ most likely be necessary to decide whether this method would actually be
+ feasible.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Exemplary accelerometer raw data and detected steps, as taken from the FootPath
+ paper.
+ The upper plot depicts raw data from the phone's sensor, while the bottom
+ plot marks on instances of detected steps.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:footpath-exemplary-data"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "link2011footpath"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The second area of interest in the FootPath paper - matching steps to expected
+ steps - was accomplished via 
+\begin_inset Quotes eld
+\end_inset
+
+two strategies...
+ (1) First Fit and (2) Best Fit
+\begin_inset Quotes erd
+\end_inset
+
+.
+ First Fit enjoys the advantage of being qualitatively somewhat easier to
+ implement and understand, given that its description is mostly in understandabl
+e plain English and is relatively simple as an algorithm (whereas Best Fit
+ requires a more high-level understanding of matrices and the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$argmin$
+\end_layout
+
+\end_inset
+
+ function).
+ However, since the paper's evaluation section mentioned how 
+\begin_inset Quotes eld
+\end_inset
+
+we have an average accuary 
+\emph on
+[sic]
+\emph default
+ of 1.6m for Best Fit and 5.6m for First Fit
+\begin_inset Quotes erd
+\end_inset
+
+, and how 
+\begin_inset Quotes eld
+\end_inset
+
+[Best Fit] performs better and more stable 
+\emph on
+[sic]
+\emph default
+ than First Fit
+\begin_inset Quotes erd
+\end_inset
+
+, it was decided that Best Fit would be the best fit for this project, provided
+ the additional complexity did not hamper implementation.
+\end_layout
+
+\begin_layout Standard
+In order to validate this judgement in the research phase, an initial test
+ implementation of the Best Fit algorithm was conducted (see Appendix 
+\emph on
+[fixme: insert source code and reference!]
+\emph default
+), testing both how easy it is to understand correctly, and whether it performs
+ as desired.
+ A quick test case, as seen in the example source code, shows it mostly
+ behaving as expected - rejecting readings that are wildly different to
+ their expected orientations, whilst registering progress for readings that
+ match up within some error range.
+ Therefore, the Best Fit algorithm was shown to be the most ideal choice
+ for the project, provided it worked with actual test data once it was possible
+ to obtain some.
+\end_layout
+
+\begin_layout Subsubsection
+Comparison and evaluation
+\end_layout
+
+\begin_layout Standard
+The FootPath paper also provides a good high-level overview of the different
+ indoor localization technologies available, dividing them into 
+\begin_inset Quotes eld
+\end_inset
+
+lateration, fingerprinting, and dead reckoning
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "link2011footpath"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Lateration methods include GPS and other beacon-related technologies, which,
+ as previously discussed, would prove impractical for this project - indeed,
+ the paper states that 
+\begin_inset Quotes eld
+\end_inset
+
+they require very carefully placed transmitters and an exact calibration,
+ making wide public deployment impractical
+\begin_inset Quotes erd
+\end_inset
+
+.
+ GPS and other methods also, according to the CompAcc paper, 
+\begin_inset Quotes eld
+\end_inset
+
+pose a serious tradeoff between localization accuracy and energy
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "constandache2010towards"
+literal "false"
+
+\end_inset
+
+, with Constandache et al.
+ having shown in another paper about energy-efficient GPS 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "constandache2009enloc"
+literal "false"
+
+\end_inset
+
+ that 
+\begin_inset Quotes eld
+\end_inset
+
+GPS...incurs a serious energy cost that can drain a fully-charged phone battery
+ in 8.5 hours
+\begin_inset Quotes erd
+\end_inset
+
+.
+ In summary, then, it is defniitely the case that beacon technologies would
+ be either too energy-consuming or simply unworkable to be used.
+\end_layout
+
+\begin_layout Standard
+Fingerprinting methods 
+\begin_inset Quotes eld
+\end_inset
+
+collect the identities and signal strengths of the WiFi access points in
+ the vicinity
+\begin_inset Quotes erd
+\end_inset
+
+, as has already been shown.
+ However, as the FootPath paper states, 
+\begin_inset Quotes eld
+\end_inset
+
+this calibration...is time-consuming, and easily becomes invalidated when physical
+ conditions change
+\begin_inset Quotes erd
+\end_inset
+
+, echoing the CompAcc paper's claims that 
+\begin_inset Quotes eld
+\end_inset
+
+war-driving is an expensive calibration operation
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This raises questions related to the amount of time available for the project;
+ it seems unlikely that there would be time to perform this calibration
+ at different areas around a building for evaluation, and there would always
+ be the risk of all the work being useless, if the WiFi access points in
+ the building were to change.
+ In addition, there also is the drawback of the need for 
+\begin_inset Quotes eld
+\end_inset
+
+an adequate number of access points in the vicinity
+\begin_inset Quotes erd
+\end_inset
+
+, which is 
+\begin_inset Quotes eld
+\end_inset
+
+problematic in protected environments like historic buildings
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This is echoed by the COEX paper, which emphasised the necessity of 
+\begin_inset Quotes eld
+\end_inset
+
+analyzing the access point environment in a target indoor area
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2014building"
+literal "false"
+
+\end_inset
+
+ before deployment, stating that 
+\begin_inset Quotes eld
+\end_inset
+
+if necessary, additional APs should be installed in...subareas lacking strong
+ AP signals
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Therefore, it seems clear that a WiFi-based localization approach would
+ be rather convoluted, and perhaps unsuited to this particular project,
+ especially given the cost associated with generating a radio map.
+\end_layout
+
+\begin_layout Standard
+Dead reckoning methods, such as FootPath and CompAcc, 
+\begin_inset Quotes eld
+\end_inset
+
+are based on detecting steps and step headings
+\begin_inset Quotes erd
+\end_inset
+
+, but often have the problem that 
+\begin_inset Quotes eld
+\end_inset
+
+errors accumulate quickly
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The FootPath authors claim that 
+\begin_inset Quotes eld
+\end_inset
+
+[their] approach can reset these errors by matching the steps using sequence
+ alignment
+\begin_inset Quotes erd
+\end_inset
+
+, a claim that likely would require some experimental evidence to assess
+ its validity.
+ In addition, the dead reckoning method proposed by FootPath requires knowledge
+ of the path the user is going to take in order to function, which may reduce
+ usability.
+\end_layout
+
+\begin_layout Standard
+In addition, it might also be possible to incorporate aspects of the camera-phon
+e based localization system 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mulloni2009indoor"
+literal "false"
+
+\end_inset
+
+ - for example, sticking posters up with scannable codes could help solve
+ some of the issues with users getting lost and being unable to localize
+ themselves via FootPath.
+ However, such considerations will be discussed further at the design stage.
+\end_layout
+
+\begin_layout Subsection
+Mobile application frameworks
+\end_layout
+
+\begin_layout Standard
+It immediately becomes apparent that this project requires the building
+ of some form of smartphone application in order to most effectively complete
+ its job; there is no other way to provide indoor navigation to users without
+ purchasing or manufacturing other equipment, since most of the users targeted
+ by the product already own smartphones.
+ However, the issue of how to go about doing so is an important one that
+ necessitated research in order to come to a reasoned judgement.
+\end_layout
+
+\begin_layout Subsubsection
+A note on research recency
+\end_layout
+
+\begin_layout Standard
+In contrast to the fast-moving world of modern software engineering, most
+ of the literature available on mobile application development is rather
+ old (i.e.
+ older than 2015).
+ Indeed, it would be quite challenging to find reliable modern research,
+ as credibility depends on the literature having time to be criticised and
+ peer-reviewed.
+ It still nevertheless has some utility, but it is prudent to consider the
+ age of the research when evaluating its applicability – specific toolsets
+ and programming styles mentioned may be very old indeed, but it may well
+ be the case that more general statements about the field still hold some
+ weight.
+\end_layout
+
+\begin_layout Subsubsection
+Characterisation
+\end_layout
+
+\begin_layout Standard
+Broadly, mobile application frameworks can be separated out into 
+\emph on
+native
+\emph default
+ development approaches, which entail writing platform-specific apps using
+ the tooling provided for each mobile platform (e.g.
+ Xcode for iOS / Android Studio for Android), and 
+\emph on
+cross-platform
+\emph default
+ development approaches, which use a framework to enable the development
+ of apps that can be written once to work on both platforms.
+ In fact, cross-platform approaches can be further separated into web, hybrid,
+ interpreted, and generated methodologies 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xanthopoulos2013comparative"
+literal "false"
+
+\end_inset
+
+.
+ Native apps 
+\begin_inset Quotes eld
+\end_inset
+
+provide the richest user experience
+\begin_inset Quotes erd
+\end_inset
+
+, as the developer is able to use the tools designed specifically for the
+ native platform, adapting their app to use familiar design elements and
+ patterns.
+ However, developing two native applications for the two major mobile platforms
+ obviously requires quite a lot of time, necessitating the use of a cross-platfo
+rm framework for this project – after all, 
+\begin_inset Quotes eld
+\end_inset
+
+a major requirement of developers is the ability to target as many platforms
+ as possible with the least amount of effort
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ohrt2012cross"
+literal "false"
+
+\end_inset
+
+, according to a paper examining cross-platform tools written in 2012.
+\end_layout
+
+\begin_layout Standard
+Choosing a hybrid framework is thus an important task, as multiple exist
+ that could be suited to the project's usecase.
+ Using the classification proposed earlier, it is necessary to decide between
+ web, hybrid, interpreted, and generated, weighing up the advantages and
+ disadvantages of each method (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:xplatform-dev-table"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename apps_taxonomy.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A comparative analysis of cross-platform development approaches.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:xplatform-dev-table"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xanthopoulos2013comparative"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The web approach involves building web apps, 
+\begin_inset Quotes eld
+\end_inset
+
+browser-based applications in which the software is downloaded from the
+ web
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xanthopoulos2013comparative"
+literal "false"
+
+\end_inset
+
+ - bringing with them the significant disadvantages of being unusable when
+ the user is offline, incurring extra time penalties needed for rendering
+ the web pages, and suffering from limited access to the underlying hardware.
+ Qualitatively, it is evident that web applications provide a very poor
+ user experience; one need only attempt to use one on a mobile phone in
+ order to see why.
+ This perceived ugliness is often due to the fact that web applications
+ must 
+\emph on
+simulate 
+\emph default
+native UI controls in order to look like other native applications, as they
+ cannot render these elements themselves.
+ However, they are significantly easier to develop than native mobile applicatio
+ns in many cases, due to the familiarity of developers with web tooling.
+\end_layout
+
+\begin_layout Standard
+Hybrid apps 
+\begin_inset Quotes eld
+\end_inset
+
+try to combine the advantages of web and native apps
+\begin_inset Quotes erd
+\end_inset
+
+ - essentially embedding a webview into an application, allowing the web
+ application to access more of the mobile platform's APIs whilst providing
+ little improvement in the way of user experience, which still has to be
+ simulated, but provides less of a barrier to developers wanting to use
+ most of the capabilities available on a platform whilst developing using
+ familiar web tooling.
+\end_layout
+
+\begin_layout Standard
+Intepreted apps are apps where 
+\begin_inset Quotes eld
+\end_inset
+
+native code is automatically generated to implement the user interface
+\begin_inset Quotes erd
+\end_inset
+
+ - that is, apps where developers can program in whatever language offered
+ by the interpreted application framework (usually languages like Ruby,
+ Python, etc.
+ which are useful outside of mobile application development), and benefit
+ from a native user interface.
+ However, users are often tied to the framework used - 
+\begin_inset Quotes eld
+\end_inset
+
+new platform-specific features can be available to apps only when...supported
+ by the development environment
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Generated apps are similar, but involve generating entirely separate application
+s comprised entirely of native code, based on some defined specification.
+ It was determined that this category can be effectively ignored; the paper
+ referencing it failed to provide any concrete examples of such a framework,
+ and the methodology appeared roughly identical to the interpreted classificatio
+n anyway.
+\end_layout
+
+\begin_layout Standard
+It is therefore evident that hybrid and interpreted methodologies are most
+ promising for this project's use-case, as both provide access to the low-level
+ platform APIs that would be required for the project (e.g.
+ accelerometer, WiFi information).
+ However, the question remains as to which framework in particular should
+ be used.
+\end_layout
+
+\begin_layout Subsubsection
+React Native and Apache Cordova
+\end_layout
+
+\begin_layout Standard
+The two prevailing frameworks used for mobile application development that
+ research identified were Apache Cordova and React Native 
+\emph on
+[fixme: we definitely need a citation for this]
+\emph default
+.
+ Indeed, a paper published in 2015 stated that Cordova was the most frequently
+ used cross-platform development framework 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "malavolta2015hybrid"
+literal "false"
+
+\end_inset
+
+, with the disused 
+\emph on
+[citation?]
+\emph default
+ Appcelerator Titanium coming in second.
+ Cordova's website states that it allows developers to make 
+\begin_inset Quotes eld
+\end_inset
+
+mobile apps with HTML, CSS & JS
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cordova"
+literal "false"
+
+\end_inset
+
+, enabling them to 
+\begin_inset Quotes eld
+\end_inset
+
+target multiple platforms with one code base
+\begin_inset Quotes erd
+\end_inset
+
+ - classifying it as a hybrid development approach, using the classification
+ system previously discussed.
+ Indeed, its website and branding appears to advertise many of the same
+ attributes as identified earlier; with 
+\begin_inset Quotes eld
+\end_inset
+
+reusable code across platforms
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+support for offline scenarios
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+access [to] native device APIs
+\begin_inset Quotes erd
+\end_inset
+
+ being identified as its three main selling points.
+ Cordova also appears to be used by multiple other frameworks - such as
+ Adobe PhoneGap and the Ionic Framework, which both build on Cordova to
+ provide a more coherent mobile application development strategy.
+\end_layout
+
+\begin_layout Standard
+In contrast, the more recently developed React Native is an interpreted
+ framework, advertising that 
+\begin_inset Quotes eld
+\end_inset
+
+with React Native, you don't build a 
+\begin_inset Quotes eld
+\end_inset
+
+mobile web app
+\begin_inset Quotes erd
+\end_inset
+
+, an 
+\begin_inset Quotes eld
+\end_inset
+
+HTML5 app
+\begin_inset Quotes erd
+\end_inset
+
+ or a 
+\begin_inset Quotes eld
+\end_inset
+
+hybrid app
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ReactNative"
+literal "false"
+
+\end_inset
+
+ - stating instead that 
+\begin_inset Quotes eld
+\end_inset
+
+you build a real mobile app that's indistinguishable from an app built using
+ Objective-C or Java.
+ This is, again, a reiteration of the 
+\begin_inset Quotes eld
+\end_inset
+
+interpreted
+\begin_inset Quotes erd
+\end_inset
+
+ class of development strategies, as React Native uses native UI components
+ (the website says 
+\begin_inset Quotes eld
+\end_inset
+
+the same fundamental UI building blocks as regular iOS and Android apps
+\begin_inset Quotes erd
+\end_inset
+
+) to provide the frontend, with JavaScript and React (a JS framework for
+ UI design) providing the code behind the UI components.
+\end_layout
+
+\begin_layout Subsubsection
+Evaluation and comparison
+\end_layout
+
+\begin_layout Standard
+Cordova might seem like a more promising choice, on the surface - given
+ that it has research backing its use, and has been around for longer than
+ React Native.
+ In addition, React Native mandates that the application be designed using
+ the model-view-controller (MVC) paradigm 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "leff2001web"
+literal "false"
+
+\end_inset
+
+ employed in React
+\emph on
+ -
+\emph default
+ which might have a tendency to increase developer friction and lock the
+ developer in to using the React framework, while Cordova allows development
+ using standard HTML5 tooling and APIs.
+ However, React Native seems like a very popular choice in the app development
+ world of 2018 - originally created and managed by Facebook, it is used
+ not only in Facebook's own applications, Facebook and Instagram, but also
+ in applications such as Skype, Uber, Bloomberg, and Tesla, as evidenced
+ by their website showcase 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ReactNative"
+literal "false"
+
+\end_inset
+
+.
+ Cordova, on the other hand, features a smorgasbord of applications that
+ are relatively unpopular and obscure, bringing its utility for modern developme
+nt into question.
+\end_layout
+
+\begin_layout Standard
+However, this analysis is mostly qualitative, and cannot be relied upon
+ to make a more definite judgement.
+ Therefore, further investigation into how to use each framework was conducted,
+ with the result that Cordova was almost immediately discounted, leaving
+ React Native as the more favourable option.
+ The methodology for this was as follows: given that accelerometer use might
+ well be required for the project - indeed, it would be a good thing to
+ use to test a mobile application framework, as well as validating the FootPath
+ algorithm's efficacy - an attempt was made to create an application featuring
+ accelerometer usage in each framework, by way of evaluation.
+\end_layout
+
+\begin_layout Standard
+Cordova almost immediately demonstrated its inadequacy in this field; its
+ official documentation on the accelerometer API, as featured prominently
+ in a Google search for 
+\begin_inset Quotes eld
+\end_inset
+
+cordova accelerometer
+\begin_inset Quotes erd
+\end_inset
+
+, states that the documentation linked to is out of date 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CordovaFail"
+literal "false"
+
+\end_inset
+
+, providing a link to the latest version - in which the accelerometer API
+ seems to have vanished entirely, given that the API is listed as deprecated
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CordovaDeprecated"
+literal "false"
+
+\end_inset
+
+.
+ Another option is provided in the form of 
+\family typewriter
+cordova-plugin-device-motion
+\family default
+, a Cordova plugin also prominently featured on Google that also has deficient
+ documentation: it states that 
+\begin_inset Quotes eld
+\end_inset
+
+with the W3C Device Motion and Orientation API now being supported...this plugin
+ is not needed anymore
+\begin_inset Quotes erd
+\end_inset
+
+.
+ However, this Device Motion API also seems outdated: the version linked
+ to by the documentation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeviceOrientationInitial"
+literal "false"
+
+\end_inset
+
+ states that it is old, while the latest version has a very large 
+\begin_inset Quotes eld
+\end_inset
+
+Beware.
+ This specification is no longer in active maintenance and the Geolocation
+ Working Group does not intend to maintain it further
+\begin_inset Quotes erd
+\end_inset
+
+ notice 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeviceOrientationLatest"
+literal "false"
+
+\end_inset
+
+.
+ Given that all of the documentation and tooling related to basic accelerometer
+ usage seems outdated or marked as deprecated, it is immediately evident
+ that Cordova would be a suboptimal choice.
+\end_layout
+
+\begin_layout Standard
+This is further strengthened by how React Native performs in this test -
+ with the prominent Google results being not only an actively maintained
+ accelerometer/sensors library, 
+\family typewriter
+react-native-sensors
+\family default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RnSensors"
+literal "false"
+
+\end_inset
+
+ (with its last commit on 2018-12-04 as of the time of writing, demonstrating
+ its actively maintained state), which features multiple projects actively
+ using it, together with examples for how to use it - but also an introductory
+ blog post that introduces developers to the library, acquainting them with
+ its design decisions and giving a general overview 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RnSensorsTutorial"
+literal "false"
+
+\end_inset
+
+.
+ It thus follows that React Native seems to have the most active community
+ of developers around it (as well as applications depending on it), and
+ seems to be in active use - making it the better choice for this project.
+\end_layout
+
+\begin_layout Subsubsection
+Relation to localization methods
+\end_layout
+
+\begin_layout Standard
+Throughout the course of research, it also became apparent that WiFi-based
+ localization would not work at all, given that iOS, one of the most prominent
+ mobile operating systems that the project would need to support, does not
+ provide any APIs for general-purpose WiFi scanning at all.
+ Indeed, an Apple Technical Q&A confirms the fact that 
+\begin_inset Quotes eld
+\end_inset
+
+iOS does not have a general purpose API for WiFi scanning and configuration
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AppleQAWiFi"
+literal "false"
+
+\end_inset
+
+.
+ Although this technical Q&A is marked as outdated, it is apparent that
+ this still holds true - no apps in the App Store seem to have this capability
+ (whereas, for Android, a number of 
+\begin_inset Quotes eld
+\end_inset
+
+WiFi analyzer
+\begin_inset Quotes erd
+\end_inset
+
+ applications are offered in the Play Store that scan for nearby WiFi networks),
+ and no libraries available for React Native support this capability on
+ iOS (both libraries evaluated during research 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RnDroidWifi"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RnWifiBis"
+literal "false"
+
+\end_inset
+
+ either do not support iOS or only support 
+\emph on
+connecting
+\emph default
+ to WiFi networks, not scanning for them).
+ Therefore, it is yet more unlikely that WiFi based localization could be
+ used by this project.
+\end_layout
+
+\begin_layout Subsection
+Turn-by-turn navigation
+\end_layout
+
+\begin_layout Subsubsection
+Overview
+\end_layout
+
+\begin_layout Standard
+To provide accurate, effective turn-by-turn navigation, the project will
+ require an algorithm for finding the shortest path between two locations
+ in a building, so that the app can guide the user along this path.
+ This is commonly done by using a 
+\emph on
+graph
+\emph default
+ data structure - an example being Project OSRM (Open Source Routing Machine)
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Osrm"
+literal "false"
+
+\end_inset
+
+, which describes itself as a 
+\begin_inset Quotes eld
+\end_inset
+
+modern C++ routing engine for shortest paths in road networks
+\begin_inset Quotes erd
+\end_inset
+
+, capable of handling 
+\begin_inset Quotes eld
+\end_inset
+
+continental sized networks within milliseconds
+\begin_inset Quotes erd
+\end_inset
+
+.
+ In addition, a prior project of my own, osm-signal 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OsmSignal"
+literal "false"
+
+\end_inset
+
+, used this graph data structure and a shortest-path algorithm in order
+ to find the shortest path between two railway stations on the UK rail network.
+ However, there are numerous different shortest-path graph-search algorithms
+ available for use, necessitating research into this field.
+\end_layout
+
+\begin_layout Subsubsection
+Dijkstra's algorithm
+\end_layout
+
+\begin_layout Standard
+Dijkstra's algorithm 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "dijkstra1959note"
+literal "false"
+
+\end_inset
+
+ was devised in 1956 by Edger W.
+ Dijkstra, and is employed in both OSRM (where it is not the default, but
+ where there is the option of using a slightly modified method - 
+\begin_inset Quotes eld
+\end_inset
+
+multi-level Dijkstra
+\begin_inset Quotes erd
+\end_inset
+
+) and osm-signal.
+ It roughly works as follows:
+\end_layout
+
+\begin_layout Enumerate
+Assign each node a 
+\emph on
+distance
+\emph default
+ (from the starting node).
+ The starting node has distance zero, and all other have distance 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+infty$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Create a set of unvisited nodes whose elements are initially every node
+ in the graph.
+ (In osm-signal, a binary heap was used instead, to optimize performance.).
+ Set the 
+\emph on
+current node
+\emph default
+ to the starting node.
+\end_layout
+
+\begin_layout Enumerate
+Consider all unvisited neighbours of the current node, calculating their
+ distances through the current node (i.e.
+ calculate their distance as the distance value of the current node, plus
+ the distance between the two nodes).
+ Compare this 
+\emph on
+tentative
+\emph default
+ distance to the current distance value of the neighbour, and assign the
+ smallest one.
+\end_layout
+
+\begin_layout Enumerate
+Mark the current node as visited, and remove it from the unvisited set.
+\end_layout
+
+\begin_layout Enumerate
+If the destination node is marked with the smallest unvisited distance,
+ stop.
+\end_layout
+
+\begin_layout Enumerate
+Otherwise, select the unvisited node that is marked with the smallest distance,
+ set it as the new current node, and go to step 3.
+\end_layout
+
+\begin_layout Standard
+Dijkstra's algorithm is relatively simple to implement, but is thought of
+ by the OSRM developers as only 
+\begin_inset Quotes eld
+\end_inset
+
+moderately fast in both pre-processing and query
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OsrmConfig"
+literal "false"
+
+\end_inset
+
+.
+ Indeed, my osm-signal implementation was qualitatively also rather slow,
+ taking at least 5 seconds for some routing queries.
+ However, it has the advantage of being relatively easy to show correctness
+ of; there are relatively few mistakes to be made in its implementation,
+ and the proof of Dijkstra's algorithm is considered trivial enough to be
+ proved in one or two pages by various university departments, presumably
+ as a part of their courses: Oregon State University present an easily understan
+dable one-page proof by induction 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OregonDjikstra"
+literal "false"
+
+\end_inset
+
+, while UC Davis' Computer Science prove it similarly easily in two pages
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "UcDavisDijkstra"
+literal "false"
+
+\end_inset
+
+.
+ This, along with its relative simplicity, would make it an ideal choice
+ for the project, providing that it were not shown to be too slow.
+\end_layout
+
+\begin_layout Subsubsection
+Contraction Hierarchies
+\end_layout
+
+\begin_layout Standard
+The OSRM project prefers the use of an algorithmic approach called Contraction
+ Hierarchies 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "geisberger2008contraction"
+literal "false"
+
+\end_inset
+
+, proposed by Robert Geisberger in 2008.
+ It presents 
+\begin_inset Quotes eld
+\end_inset
+
+a route planning technique solely based on the concept of node contraction
+\begin_inset Quotes erd
+\end_inset
+
+, which involves adding 
+\begin_inset Quotes eld
+\end_inset
+
+shortcut edges
+\begin_inset Quotes erd
+\end_inset
+
+ to the graph - essentially, they use a modified version of Dijkstra's algorithm
+, but pre-process the graph to create shortcuts between groups of nodes,
+ depending on how 
+\begin_inset Quotes eld
+\end_inset
+
+important
+\begin_inset Quotes erd
+\end_inset
+
+ various edges are deemed to be.
+ It is evident how this is useful for OSRM, as routing across large nationwide
+ road networks would surely benefit from prioritising the consideration
+ of major highways and carriageways over small local roads.
+ However, as noted in the OSRM source code, CH provides 
+\begin_inset Quotes eld
+\end_inset
+
+extremely fast queries, but slow pre-processing
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OsrmConfig"
+literal "false"
+
+\end_inset
+
+ - a potential downside of such an algorithm.
+ In addition, CH is a non-trivial algorithm to understand and implement
+ - their query algorithm is 
+\begin_inset Quotes eld
+\end_inset
+
+a symmetric Dijkstra-like bidirectional procedure
+\begin_inset Quotes erd
+\end_inset
+
+ that requires an 
+\begin_inset Quotes eld
+\end_inset
+
+interleaved...forward and backward search
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Therefore, it is questionable as to whether the time required to understand
+ it, implement it, and verify its correctness can be justified.
+\end_layout
+
+\begin_layout Subsubsection
+A*
+\end_layout
+
+\begin_layout Standard
+The A* search algorithm 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hart1968formal"
+literal "false"
+
+\end_inset
+
+, introduced in 1967, mentions a 
+\begin_inset Quotes eld
+\end_inset
+
+heuristic approach
+\begin_inset Quotes erd
+\end_inset
+
+ to the problem, involving 
+\begin_inset Quotes eld
+\end_inset
+
+special knowledge about the domain of the problem being represented
+\begin_inset Quotes erd
+\end_inset
+
+ - i.e.
+ making use of the fact that the graph used to model points in space is
+ not just an arbitrary graph, using a 
+\emph on
+heuristic function
+\emph default
+ (for example, the as-the-crow-flies distance between two locations) to
+ direct the search toward areas more likely to lead to the goal node.
+ A* can be seen as an extension of Dijkstra's algorithm - in step 6 from
+ the description earlier, when choosing a node to consider next, A* adds
+ the nodes' distance to the value of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$h(n)$
+\end_layout
+
+\end_inset
+
+ - i.e.
+ the heuristic function applied to the node, thus choosing nodes more likely
+ to lead to the goal first.
+ This avoids the problem of 
+\begin_inset Quotes eld
+\end_inset
+
+using absolutely no information from the problem domain
+\begin_inset Quotes erd
+\end_inset
+
+ evident with the plain version of Dijkstra's algorithm, allowing the algorithm
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+still find the shortest path, but...do so by expanding, typically, considerably
+ fewer nodes
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Since this algorithm is a relatively simplistic extension of Dijkstra's
+ algorithm, it is similarly rather simple to implement, whilst bringing
+ noticeable efficiency benefits - as clearly shown when viewing a visualisation
+ of Dijkstra's algorithm 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DijkstraVis"
+literal "false"
+
+\end_inset
+
+ and comparing this to one of A* 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AstarVis"
+literal "false"
+
+\end_inset
+
+; A* quite quickly heads straight for the goal node, routing around an obstacle,
+ while Dijkstra wastes time exploring in all directions away from the start
+ node, when most of them would never yield the shortest path.
+\end_layout
+
+\begin_layout Subsubsection
+Evaluation and comparison
+\end_layout
+
+\begin_layout Standard
+Given the large number of possible graph search algorithms, each with their
+ own application-specific properties, it seems unlikely that a general judgement
+ of which algorithm is superior can be reached.
+ However, at this initial research stage, A* looks to be the best way forward
+ for this project, given its minimal complexity - it's just a slightly modified
+ version of Dijkstra's algorithm - and supposedly acceptable performance.
+ At a later stage, of course, it may well be required to investigate implementin
+g Contraction Hierarchies or another, more advanced graph search algorithm,
+ if performance proves to be an issue.
+\end_layout
+
+\begin_layout Section
+Design
+\end_layout
+
+\begin_layout Subsection
+React Native setup
+\end_layout
+
+\begin_layout Subsection
+
+\family typewriter
+react-native-sensors
+\family default
+ setup and testing
+\end_layout
+
+\begin_layout Subsection
+Step sensing
+\end_layout
+
+\begin_layout Subsection
+Map tiles
+\end_layout
+
+\begin_layout Subsection
+Building a navigation graph
+\end_layout
+
+\begin_layout Subsection
+Routing server
+\end_layout
+
+\begin_layout Subsection
+Turn-by-turn navigation UI
+\end_layout
+
+\begin_layout Subsection
+Starting navigation and place search
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "references"
+options "bibtotoc,plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
