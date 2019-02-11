@@ -110,6 +110,138 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Section
+Meta
+\end_layout
+
+\begin_layout Subsection
+Activity log
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Use this to record the progress of your project.
+ You may want to discuss:
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+• What you have done (eg from one week to the next)
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+• (if you are working in a group), what discussions you have had
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+• Any changes that you have (or will need) to make to your plans
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+• What resources you have found/hope to find
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+• What problems you are encountering and how you are solving them
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+• What you are going to do next
+\end_layout
+
+\begin_layout Subsubsection
+2018-10-29
+\end_layout
+
+\begin_layout Standard
+This week, I started researching how to determine the user's current location,
+ given that it was the first item on my PPF.
+ I first looked at examples of prior art (e.g.
+ the COEX deployment mentioned in the research section), using this to guide
+ my research into what specific technologies were used - for example, some
+ papers about WiFi and FM-based localization, as well as the FootPath paper
+ and a paper that used camera phones.
+ I found the WiFi k-nearest-neighbours approach mentioned in one of the
+ papers to be quite hard to understand, and wanted to investigate it and
+ the FootPath implementation further.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Action items set for next week
+\end_layout
+
+\begin_layout Itemize
+Investigate the WiFi k-nearest-neighbours mathematics, and see how hard
+ it is to understand/implement
+\end_layout
+
+\begin_layout Itemize
+Investigate the FootPath algorithms, and how hard the maths behind it is
+ to understand
+\end_layout
+
+\begin_layout Itemize
+Progress toward a sample implementation of some of these methods
+\end_layout
+
+\begin_layout Subsubsection
+2018-11-05
+\end_layout
+
+\begin_layout Standard
+I found the FootPath algorithm to be the most interesting approach to investigat
+e, so I researched the maths behind their Best Fit implementation, which
+ turned out not to be too hard to understand.
+ In addition, I wrote a sample implementation of this algorithm in Rust
+ (the language I'm most familiar with), to verify my understanding.
+ Some initial testing with some fabricated values seemed to show the implementat
+ion working - it rejected wildly incorrect values, whilst continuing to
+ report progress if the readings were close enough to the correct values.
+\end_layout
+
+\begin_layout Standard
+Following on from the ease of implementation of FootPath, I didn't think
+ it was necessary to investigate WiFi that much further, although I did
+ follow up on the action item and looked up a quick summary of how k-nearest-nei
+ghbours works.
+ The FootPath paper had provided some initial reasons why WiFi-based localizatio
+n may have been too costly, so I decided to look into this further, as well
+ as pursuing other aspects of my PPF.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Action items set for next week
+\end_layout
+
+\begin_layout Itemize
+Start researching mobile application frameworks in earnest, in order to
+ make progress toward testing
+\end_layout
+
+\begin_layout Itemize
+Look for more evidence to make a decision between FootPath and WiFi
+\end_layout
+
+\begin_layout Itemize
+Look into graph-search algorithms, for A to B navigation.
+\end_layout
+
+\begin_layout Section
 Research
 \end_layout
 
