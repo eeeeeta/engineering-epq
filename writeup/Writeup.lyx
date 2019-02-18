@@ -114,7 +114,8 @@ Meta
 \end_layout
 
 \begin_layout Subsection
-Activity log
+Activity log (incl.
+ Gantt charts)
 \end_layout
 
 \begin_layout Standard
@@ -239,6 +240,179 @@ Look for more evidence to make a decision between FootPath and WiFi
 
 \begin_layout Itemize
 Look into graph-search algorithms, for A to B navigation.
+\end_layout
+
+\begin_layout Subsubsection
+2018-11-12
+\end_layout
+
+\begin_layout Standard
+This week, I mainly focused on researching mobile application frameworks,
+ and unfortunately didn't have that much time to research the other action
+ items.
+ This involved a combination of looking through traditional literature (which
+ was mostly outdated, i.e.
+ 2015 and earlier), and looking online for more up-to-date, but less academic,
+ information.
+\end_layout
+
+\begin_layout Standard
+My research narrowed the options down for mobile application frameworks
+ to React Native and Cordova, so I decided that I'd need to try and work
+ towards implementation on using both of these frameworks in order to test
+ which one would be the best to use.
+\end_layout
+
+\begin_layout Standard
+I also took the time to re-evaluate my time planning, aiming to make a new
+ Gantt chart by next week.
+ To account for the change, I considered the fact that indoor localization
+ & mobile app framework finding were probably two of the most important
+ PPF points, given that graph searching/navigation wasn't anticipated to
+ take much time at all, due to its relatively low complexity.
+ Therefore, a new Gantt chart was required, to incorporate this information.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Action items for next week
+\end_layout
+
+\begin_layout Itemize
+Investigate steps required to get accelerometer, compass, and WiFi scanning
+ working on both mobile platforms
+\end_layout
+
+\begin_layout Itemize
+Make a new, or altered, Gantt chart
+\end_layout
+
+\begin_layout Subsubsection
+2018-11-19
+\end_layout
+
+\begin_layout Standard
+This week, I took the time to update my Gantt chart, removing time allocated
+ to research real-time sensing (which I deemed to be out of scope for this
+ EPQ: making such a system could be another project in and of itself) and
+ to preliminary implementations, in order to make more time for researching
+ mobile app frameworks and localization.
+ In doing so, I noticed that the old Gantt chart was rather vague, and took
+ steps to rectify this.
+\end_layout
+
+\begin_layout Standard
+I also looked into comparing React Native and Cordova, as mentioned in last
+ week's action items, and, in doing so, found out that WiFi localization
+ would in fact not be possible (it's not allowed on iOS), causing me to
+ direct my research away from it.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Action items for next week
+\end_layout
+
+\begin_layout Itemize
+Research different graph-search algorithms
+\end_layout
+
+\begin_layout Subsubsection
+2018-11-19
+\end_layout
+
+\begin_layout Standard
+This week, I researched different graph-search algorithms for use in my
+ project, drawing on both literature and prior experience from implementing
+ Djikstra's algorithm in an earlier project of mine.
+ As planned, this didn't take that long, given my prior knowledge, although
+ I did make sure to justify my choice of algorithm through proper research.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Action items for next week
+\end_layout
+
+\begin_layout Itemize
+Do more research on localization methods
+\end_layout
+
+\begin_layout Subsubsection
+2018-11-26
+\end_layout
+
+\begin_layout Standard
+In order to flesh out my research on accelerometer-based localization, I
+ conducted more research into this field - finding, for example, the CompAcc
+ paper, which was a precursor to the FootPath system that I looked at earlier.
+ I also looked at other completely different methods for localization, such
+ as the Scape AI/computer vision system, to make my research yet more detailed.
+\end_layout
+
+\begin_layout Standard
+For next week, as planned on the Gantt chart, I decided to start writing
+ up my research into a formal report; previously, all research had been
+ summarized in the form of weekly research presentations.
+ This was also required in order to meet the school's deadlines for the
+ literature section of the final EPQ.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Action items for next week
+\end_layout
+
+\begin_layout Itemize
+Convert the research presentations into a formal report
+\end_layout
+
+\begin_layout Subsubsection
+2018-02-03
+\end_layout
+
+\begin_layout Standard
+This week was mainly focused on writing up the research report, which involved
+ investigating BibTeX, in order to add references to my writeup (written
+ using LyX and LaTeX).
+ I found that Google Scholar had an automatic BibTeX reference generator,
+ which greatly helped this task.
+\end_layout
+
+\begin_layout Standard
+Looking at my Gantt chart, the next stage of the project was working toward
+ some initial designs and implementations.
+ However, I found this stage to be inadequately planned, so I resolved to
+ make a more detailed plan of what needed to be done in the way of implementatio
+n.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+At this point, I took a break for the Christmas holidays.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Action items for after the holidays
+\end_layout
+
+\begin_layout Itemize
+Make a new Gantt chart to plan the design stages
+\end_layout
+
+\begin_layout Itemize
+Work toward initial designs and implementations
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Section
