@@ -2488,6 +2488,274 @@ Design
 \end_layout
 
 \begin_layout Subsection
+System structure
+\end_layout
+
+\begin_layout Standard
+The first stage of the design process involves defining and justifying what
+ exactly must be created - i.e.
+ how should the project structure itself, and what discrete software components
+ should be created to provide the required system? Since there were a number
+ of ways in which the project could be structured, I decided to perform
+ a brief analysis of which structure the project should use.
+\end_layout
+
+\begin_layout Subsubsection
+Required functionality
+\end_layout
+
+\begin_layout Standard
+From the PPF, the required functionality of the whole project amounts to:
+\end_layout
+
+\begin_layout Itemize
+determining the current location of the user;
+\end_layout
+
+\begin_layout Itemize
+providing A-to-B turn-by-turn navigation to the user (which involves calculating
+ the shortest route between two points, and splitting this into discrete
+ turn-by-turn instructions);
+\end_layout
+
+\begin_layout Itemize
+estimating the user's time of arrival;
+\end_layout
+
+\begin_layout Itemize
+providing a mobile interface to the system, usable on both iOS and Android.
+\end_layout
+
+\begin_layout Standard
+In addition, the proposed architecture should ideally maintain 
+\emph on
+genericity
+\emph default
+ - while this EPQ will implement the system for one specific deployment,
+ it would be ideal if the system could easily be extended to others without
+ changing the code or architecture significantly.
+\end_layout
+
+\begin_layout Standard
+However, there are a number of ways in which this functionality could potentiall
+y be implemented.
+\end_layout
+
+\begin_layout Subsubsection
+Proposal 1: monolithic mobile application
+\end_layout
+
+\begin_layout Standard
+Arguably the simplest possible architecture for the system would involve
+ just one mobile application, which would perform all necessary tasks required
+ for navigation, relying in no way on any server-side component.
+\end_layout
+
+\begin_layout Standard
+This would be rather unconventional for navigation applications - most common
+ apps on the market (e.g.
+ Google Maps, Waze) introduce an extra server-side component for their routing.
+ However, it is possible - for example, the Android application OSMAnd~
+ does all of its routing offline, using downloaded OpenStreetMap data.
+\end_layout
+
+\begin_layout Paragraph
+Advantages
+\end_layout
+
+\begin_layout Itemize
+No need to maintain multiple codebases, or familiarise oneself with multiple
+ development frameworks; only one software application is created (potentially
+ reducing development time)
+\end_layout
+
+\begin_layout Itemize
+No internet connection required, once the application is installed (all
+ data is local) - making the app ideal for areas without internet
+\end_layout
+
+\begin_layout Itemize
+No need to consider interaction between multiple different parts of the
+ system; everything takes place in one mobile app
+\end_layout
+
+\begin_layout Itemize
+Performance not dependent on network lag, as no internet connection is used
+\end_layout
+
+\begin_layout Paragraph
+Disadvantages
+\end_layout
+
+\begin_layout Itemize
+Performance dependent on the user's phone - if their phone is slow, application
+ performance may suffer or cause lag when performing more compute-intensive
+ tasks, like graph searching
+\end_layout
+
+\begin_layout Itemize
+Battery life may suffer, if the application performs many compute-intensive
+ tasks
+\end_layout
+
+\begin_layout Itemize
+Size of application is greater, due to required offline data & increased
+ code size
+\end_layout
+
+\begin_layout Itemize
+An update of the whole application is required to make any changes - potentially
+ slowing down development or rollout of new features
+\end_layout
+
+\begin_layout Itemize
+Such an architecture creates a greater dependency on the mobile application
+ framework used; switching to a native approach, or rewriting the app to
+ use another framework, would mean rewriting all of the system's code
+\end_layout
+
+\begin_layout Itemize
+Specific applications must be created for each possible deployment of the
+ system, reducing genericity - since the app needs all data for a given
+ deployment, it becomes harder to adapt it for new buildings without creating
+ a separate version of the app for that new deployment (or by bundling lots
+ of different datasets into one generic app, further increasing size)
+\end_layout
+
+\begin_layout Subsubsection
+Proposal 2: client-server architecture
+\end_layout
+
+\begin_layout Standard
+An alternative architecture, and indeed that employed by commonly-used tradition
+al navigation applications like Google Maps, is to split the system into
+ a mobile 
+\begin_inset Quotes eld
+\end_inset
+
+client
+\begin_inset Quotes erd
+\end_inset
+
+ component and a 
+\begin_inset Quotes eld
+\end_inset
+
+server
+\begin_inset Quotes erd
+\end_inset
+
+ component, where the client is used to obtain input from the user and display
+ navigation guidance, while the server performs more compute-intensive tasks,
+ like finding a route between two points.
+ This also involves specifying how the two components will interact - i.e.
+ defining the application programming interface (API) for the server.
+\end_layout
+
+\begin_layout Paragraph
+Advantages
+\end_layout
+
+\begin_layout Itemize
+Compute-intensive tasks can be offloaded to a more powerful server component,
+ improving app responsiveness and battery life
+\end_layout
+
+\begin_layout Itemize
+New routing information, or improvements to the routing algorithm, can be
+ incorporated into the server without a change in client code
+\end_layout
+
+\begin_layout Itemize
+The size of the mobile application is reduced, as it mustn't download all
+ data required for routing
+\end_layout
+
+\begin_layout Itemize
+Any server-side programming language can be used, as long as it implements
+ the specified API; furthermore, it becomes easier to change the mobile
+ framework used, as less code must be rewritten
+\end_layout
+
+\begin_layout Itemize
+The same client application could be used for multiple deployments, given
+ a generic API - different deployments would just use a different server-side
+ component
+\end_layout
+
+\begin_layout Paragraph
+Disadvantages
+\end_layout
+
+\begin_layout Itemize
+Two separate components must be developed, in addition to an API specification,
+ potentially increasing development time
+\end_layout
+
+\begin_layout Itemize
+A network connection is required for the app to be useful
+\end_layout
+
+\begin_layout Subsubsection
+Proposal 3: client with lightweight server
+\end_layout
+
+\begin_layout Standard
+As a compromise between the two, another alternative architecture could
+ involve one mobile application, similar to Proposal 1, that incorporated
+ all necessary functionality but left out any required datasets (e.g.
+ map tiles and other routing information), along with a 'dumb' server, from
+ which the mobile application could download its data if and when required
+ (e.g.
+ at startup, and when the data changes).
+ This would involve the same development workload as Proposal 1 (the server-side
+ component could simply reuse an off-the-shelf HTTP server, like nginx,
+ to host the data files on), while keeping some flexibility (the data could
+ be changed and pushed to the mobile clients without them completely reinstallin
+g the application).
+\end_layout
+
+\begin_layout Paragraph
+Advantages
+\end_layout
+
+\begin_layout Itemize
+The app's data can be updated without reinstalling the application
+\end_layout
+
+\begin_layout Itemize
+The app is still generic, as different servers could provide different datasets
+ for different employments
+\end_layout
+
+\begin_layout Itemize
+Once the app had downloaded its data, it could work offline from then on
+ until an update was desired
+\end_layout
+
+\begin_layout Itemize
+No need to maintain multiple codebases, or design an API (as before)
+\end_layout
+
+\begin_layout Paragraph
+Disadvantages
+\end_layout
+
+\begin_layout Itemize
+This solution doesn't address the performance concerns from Proposal 1;
+ only the ones about genericity and data freshness.
+\end_layout
+
+\begin_layout Itemize
+Changes to the routing algorithm are still impossible without an app update
+ - only data can be changed
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsection
 React Native setup
 \end_layout
 
