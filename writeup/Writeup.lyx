@@ -2907,7 +2907,7 @@ Easier to develop applications, as Expo handles interacting with the React
 \end_layout
 
 \begin_layout Itemize
-Expo comes bundled with an easy-to-use SDK
+Expo comes bundled with an easy-to-use SDK & library set
 \end_layout
 
 \begin_layout Itemize
@@ -2917,6 +2917,244 @@ Published applications can be updated over-the-air, without pushing new
 
 \begin_layout Itemize
 Using Expo doesn't limit a developer's ability to publish to app stores
+\end_layout
+
+\begin_layout Itemize
+There's no need to handle downloading & installing Android Studio or Xcode,
+ reducing disk space usage on the developer's machine
+\end_layout
+
+\begin_layout Paragraph
+Disadvantages
+\end_layout
+
+\begin_layout Itemize
+Reliant on the Expo infrastructure: an Expo app still needs to download
+ its assets (code, etc.) from Expo's servers on first boot, and thus cannot
+ do 
+\emph on
+anything
+\emph default
+ until given an internet connection
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+This can be solved by buiding a standalone app - but the docs note that
+ connectivity is still required for updates.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Expo 
+\begin_inset Quotes eld
+\end_inset
+
+includes a bunch of APIs regardless of whether or not you are using them
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WhyNotExpo"
+literal "false"
+
+\end_inset
+
+, increasing binary size
+\end_layout
+
+\begin_layout Itemize
+Expo apps 
+\begin_inset Quotes eld
+\end_inset
+
+don't support background code execution
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WhyNotExpo"
+literal "false"
+
+\end_inset
+
+ - for example, a navigation app couldn't provide guidance unless it was
+ permanently in the foreground
+\end_layout
+
+\begin_layout Itemize
+If the Expo SDK doesn't cover your use-case, using third-party libraries
+ is harder, and in some cases, impossible:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+most third-party libraries assume you aren't using Expo (for example, 
+\family typewriter
+react-native-sensors
+\family default
+ and 
+\family typewriter
+react-native-svg-charts
+\family default
+, both used later on), causing difficulty when trying to use these
+\end_layout
+
+\begin_layout Itemize
+third-party libraries using native code 
+\emph on
+cannot
+\emph default
+ be used with Expo (without 'ejecting' and transforming the app into a regular
+ React Native app)
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Evaluation
+\end_layout
+
+\begin_layout Standard
+Expo seemed like a useful way to get started with React Native, albeit one
+ that prioritised ergonomics in the short-term over long-term sustainable
+ development.
+ While Expo may be very useful for simple apps, where functionality is completel
+y covered by the Expo SDK, going with Expo carries the risk of having to
+ 
+\begin_inset Quotes eld
+\end_inset
+
+eject
+\begin_inset Quotes erd
+\end_inset
+
+ later, somewhat reducing the advantages of going with Expo in the first
+ place (as then a native toolchain would be required to continue working
+ on the project, precisely as Expo aims to avoid).
+\end_layout
+
+\begin_layout Standard
+In addition, the 
+\begin_inset Quotes eld
+\end_inset
+
+kitchen sink
+\begin_inset Quotes erd
+\end_inset
+
+ nature of Expo made it less of a good fit for this project (bundling unnecessar
+y libraries that increased app size was unwanted) - as well as the fact
+ that libraries not covered by the Expo SDK would potentially be harder
+ to use - meant that its use for this project seemed increasingly less necessary.
+ Therefore, I decided to attempt setting up React Native without Expo; if
+ it proved to be too challenging, Expo could always be used to ease the
+ experience at a later date (whereas starting with Expo and 'ejecting' could
+ potentially be painful).
+\end_layout
+
+\begin_layout Subsubsection
+Toolchain setup
+\end_layout
+
+\begin_layout Standard
+In order to facilitate easy development of the app throughout the project
+ duration, the React Native setup instructions were followed - albeit in
+ an Arch Linux 
+\family typewriter
+chroot
+\family default
+ on a portable hard-disk drive (HDD).
+ This setup enabled me to both reduce disk space usage on my main machines
+ (as Android Studio could be installed on the portable HDD), as well as
+ enabling me to develop the app on both my laptop and my desktop machines.
+\end_layout
+
+\begin_layout Standard
+To perform testing, I opted to use my personal Android phone, configured
+ to allow USB debugging; whilst an Android emulator would have been an option,
+ it would have been useless for testing step detection (due to the lack
+ of emulated accelerometer), whilst also potentially being resource-intensive
+ on my development machines.
+\end_layout
+
+\begin_layout Standard
+Following the tutorial to set this up, then, I was able to compile, build
+ and run the example 
+\begin_inset Quotes eld
+\end_inset
+
+Hello World
+\begin_inset Quotes erd
+\end_inset
+
+ application on my phone, allowing development to continue (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-React-Native"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /home/eeeeeta/engineering-epq/screenshots/welcome_to_rn.png
+	width 20page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The React Native 
+\begin_inset Quotes eld
+\end_inset
+
+hello world
+\begin_inset Quotes erd
+\end_inset
+
+ application (screenshot from mobile).
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-React-Native"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
