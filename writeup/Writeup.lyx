@@ -2751,12 +2751,172 @@ Changes to the routing algorithm are still impossible without an app update
  - only data can be changed
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection
+Evaluation
+\end_layout
 
+\begin_layout Standard
+In terms of developer ergonomics and time constraints, Proposals 1 and 3
+ look to be optimal, making them potential candidates for the project's
+ architecture.
+ However, the performance disadvantage mentioned in Proposal 2 is not to
+ be overlooked; from prior experience, a reasonably naïve implementation
+ of Djikstra's algorithm in osm-signal managed to saturate all four cores
+ of a reasonably powerful server machine, taking a not insignificant amount
+ of time to complete its routing task.
+ Of course, the performance requirements might be smaller on an indoor scale,
+ especially depending on where the system is deployed, but the time required
+ to tune code to be optimized for performance and battery life might well
+ cancel out any benefits saved by simplifying the overall architecture.
+\end_layout
+
+\begin_layout Standard
+Furthermore, a client-server architecture opens the door to further innovation
+ and extension of the project, especially with regards to the creation of
+ new clients - for example, a web interface for users at a desktop computer
+ could be created, reusing most of the server-side code.
+\end_layout
+
+\begin_layout Standard
+Therefore, I decided to go with Proposal 2 for the overall architecture
+ of the system, despite the potential complexity increase from writing multiple
+ pieces of code, as I believed it would provide the most optimal user experience
+, and provide flexibility for further extension once created.
 \end_layout
 
 \begin_layout Subsection
 React Native setup
+\end_layout
+
+\begin_layout Standard
+In the research section, React Native was identified as the mobile framework
+ to use for this project.
+ However, many design decisions still need to be made when implementing
+ the application - the first of which was immediately presented in the 
+\begin_inset Quotes eld
+\end_inset
+
+Getting Started
+\begin_inset Quotes erd
+\end_inset
+
+ section of the React Native documentation.
+ React Native's initial tutorial offers a choice between Expo, 
+\begin_inset Quotes eld
+\end_inset
+
+the easiest way to start building a new React Native application
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RnGettingStarted"
+literal "false"
+
+\end_inset
+
+, and 
+\begin_inset Quotes eld
+\end_inset
+
+building projects with native code
+\begin_inset Quotes erd
+\end_inset
+
+.
+ However, it was unclear as to which option should be taken - both options
+ had their advantages and disadvantages, necessitating a more thorough analysis.
+\end_layout
+
+\begin_layout Subsubsection
+Expo
+\end_layout
+
+\begin_layout Standard
+Expo is, according to their website, 
+\begin_inset Quotes eld
+\end_inset
+
+a free and open source toolchain built around React Native
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ExpoIo"
+literal "false"
+
+\end_inset
+
+ - essentially, it provides a framework for developers to get started with
+ writing React Native apps without having to compile any native code.
+ The tutorial states as such - running the application simply entails 
+\begin_inset Quotes eld
+\end_inset
+
+install[ing] the Expo client app on your...phone and connect[ing] to the same
+ wireless network as your computer
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RnGettingStarted"
+literal "false"
+
+\end_inset
+
+, and then scanning a QR code.
+ In addition, using Expo Snack 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ExpoSnack"
+literal "false"
+
+\end_inset
+
+, it's possible to run Expo apps in the browser, without using a phone at
+ all.
+\end_layout
+
+\begin_layout Standard
+Expo also provide the Expo SDK 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ExpoSdk"
+literal "false"
+
+\end_inset
+
+, an easy-to-use library that bundles a set of native functionality, avoiding
+ the need to use other third-party libraries - including, for example, an
+ accelerometer library, as required by this project.
+\end_layout
+
+\begin_layout Paragraph
+Advantages
+\end_layout
+
+\begin_layout Itemize
+Easier to develop applications, as Expo handles interacting with the React
+ Native toolchain for you
+\end_layout
+
+\begin_layout Itemize
+Expo comes bundled with an easy-to-use SDK
+\end_layout
+
+\begin_layout Itemize
+Published applications can be updated over-the-air, without pushing new
+ versions of the app to app stores
+\end_layout
+
+\begin_layout Itemize
+Using Expo doesn't limit a developer's ability to publish to app stores
 \end_layout
 
 \begin_layout Subsection
