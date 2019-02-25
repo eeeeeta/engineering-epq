@@ -3108,7 +3108,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -3163,6 +3163,142 @@ name "fig:The-React-Native"
 react-native-sensors
 \family default
  setup and testing
+\end_layout
+
+\begin_layout Standard
+The next step was to write a small React Native application, in order to
+ verify that the accelerometer worked and could generate usable readings.
+ To accomplish this, the 
+\family typewriter
+react-native-sensors
+\family default
+ library was chosen (as justified earlier), as well as the 
+\family typewriter
+react-native-svg-charts
+\family default
+ library for graph plotting (which featured prominently on Google; since
+ this was just a test, an in-depth evaluation was not performed).
+ This application was able to demonstrate that moving the phone up and down
+ manually, or, indeed, walking with it, generated noticeable changes in
+ the accelerometer Z readings (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:accel-testing"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ This was promising when read in conjunction with the FootPath paper, which
+ stated that 
+\begin_inset Quotes eld
+\end_inset
+
+we can detect a step by matching the values to a sharp drop in acceleration,
+ attributed to the jiggling of the phone
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "link2011footpath"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/eeeeeta/engineering-epq/screenshots/accel_testing_graph.png
+	width 20page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Screenshot of the accelerometer testing app created for evaluation purposes.
+ The three sliders show changes in the x, y, and z values respectively,
+ while the graph plots the change in the z value.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:accel-testing"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However, the FootPath paper mentioned the necessity for 
+\begin_inset Quotes eld
+\end_inset
+
+a low pass filter
+\begin_inset Quotes erd
+\end_inset
+
+ in order 
+\begin_inset Quotes eld
+\end_inset
+
+to further improve detection
+\begin_inset Quotes erd
+\end_inset
+
+, so a new version of the application was developed to incorporate this
+ change.
+ For quick testing purposes, the top-ranked result on Google was chosen,
+ leading to the 
+\family typewriter
+lpf
+\family default
+ library by GitHub user 
+\family typewriter
+uhho
+\family default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LpfLibrary"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Subsection
