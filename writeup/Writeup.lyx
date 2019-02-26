@@ -3176,8 +3176,16 @@ react-native-sensors
 \family typewriter
 react-native-svg-charts
 \family default
- library for graph plotting (which featured prominently on Google; since
- this was just a test, an in-depth evaluation was not performed).
+ library 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RnSvgCharts"
+literal "false"
+
+\end_inset
+
+ for graph plotting (which featured prominently on Google; since this was
+ just a test, an in-depth evaluation was not performed).
  This application was able to demonstrate that moving the phone up and down
  manually, or, indeed, walking with it, generated noticeable changes in
  the accelerometer Z readings (Figure 
@@ -3295,14 +3303,133 @@ literal "false"
 \end_inset
 
 .
+ This library, however, did seem somewhat unmaintained, with its latest
+ commit being in April 2014; nevertheless, a testing implementation was
+ still made (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:accel-testing-lpf"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), in order to verify whether it worked despite being unmaintained (indeed,
+ that may be no problem for a simple library like this).
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
 
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/eeeeeta/engineering-epq/screenshots/accel_testing_graph_lpf.png
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Screenshot of a modified accelerometer testing app (with sliders as in Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:accel-testing"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), now incorporating a 'LPF smoothing' slider, used to adjust the parameters
+ for the low-pass filter.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:accel-testing-lpf"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It was, however, hard to tell whether the LPF had any effect on the results
+ or not; since the library chosen for graph plotting, 
+\family typewriter
+react-native-svg-charts
+\family default
+, did not provide any indication as to the axis scaling, the plotted graph
+ with the LPF enabled looked almost the same as the one without it - which
+ could either be due to a failure in the LPF, or simply because the graphing
+ library changed its scaling with the new data, zooming in on what is actually
+ a smaller amount of noise.
+ However, attempting to coerce the graphing library into scaling consistently
+ seemed like a poor use of time - moving on to implementing the step sensing
+ component would show whether or not the LPF worked quickly enough; if it
+ didn't work, work on the graphing library could be done later.
 \end_layout
 
 \begin_layout Subsection
 Step sensing
+\end_layout
+
+\begin_layout Standard
+As previously discussed, a preliminary implementation of FootPath was completed
+ during the research stage of the project, in the Rust programming language.
+ In order to test this, the code was ported rather naïvely to JavaScript
+ for use with React Native (no attempts were made at this juncture to optimize
+ the code in any way, although the preliminary implementation used was not
+ very optimized; such work could always be done later if performance proved
+ to be a real problem).
+\end_layout
+
+\begin_layout Standard
+The FootPath algorithm has a number of tweakable parameters 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "link2011footpath"
+literal "false"
+
+\end_inset
+
+ - the difference in acceleration (
+\family typewriter
+difference_accel
+\family default
+) required to detect a step; the time window during which a step can be
+ detected (
+\family typewriter
+window_ms
+\family default
+); and the timeout after step detection, after which no more steps can be
+ detected (
+\family typewriter
+timeout_ms
+\family default
+).
 \end_layout
 
 \begin_layout Subsection
