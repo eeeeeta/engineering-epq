@@ -76,10 +76,9 @@
             <task id="39" name="EVALUATION COMPLETE" color="#8cb6ce" meeting="true" start="2019-03-25" duration="0" complete="0" thirdDate="2018-09-20" thirdDate-constraint="0" expand="true"/>
         </task>
         <task id="5" name="HAND IN DAY" color="#ff0000" meeting="true" start="2019-03-25" duration="0" complete="0" thirdDate="2018-09-20" thirdDate-constraint="0" expand="true"/>
-        <task id="61" name="POWERPOINT" color="#009999" meeting="false" start="2019-03-25" duration="20" complete="0" thirdDate="2018-09-20" thirdDate-constraint="0" expand="true">
+        <task id="61" name="POWERPOINT" color="#009999" meeting="false" start="2019-03-25" duration="19" complete="0" thirdDate="2018-09-20" thirdDate-constraint="0" expand="true">
             <task id="40" name="PPT: write up presentation" color="#8cb6ce" meeting="false" start="2019-03-25" duration="10" complete="0" thirdDate="2018-09-20" thirdDate-constraint="0" expand="true"/>
             <task id="41" name="PPT: rehearse presentation" color="#8cb6ce" meeting="false" start="2019-04-08" duration="9" complete="0" thirdDate="2018-09-20" thirdDate-constraint="0" expand="true"/>
-            <task id="7" name="HOLIDAYS" color="#8cb6ce" meeting="true" start="2019-04-22" duration="0" complete="0" thirdDate="2018-09-20" thirdDate-constraint="0" expand="true"/>
         </task>
     </tasks>
     <resources/>
