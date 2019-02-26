@@ -162,12 +162,99 @@ Use this to record the progress of your project.
 \end_layout
 
 \begin_layout Subsubsection
+2018-09-20 (pre-project planning)
+\end_layout
+
+\begin_layout Standard
+Before I started work on the project writeup, design and implementation,
+ I set about defining what project I'd like to do, and wrote up the Project
+ Proposal Form (PPF), with this information.
+ In order to decide, I wrote up proposals for four different potential problems
+ to solve, discussing my ideas with the Engineering staff at my school and
+ my tutor-assessor (TA) in order to decide which one I might like to tackle
+ for my EPQ.
+ In order to keep my project manageable, my TA advised me to keep my project
+ reasonably narrowly-defined, aiming to clearly identify and narrow down
+ a specific issue to tackle, instead of aiming to solve an inachievably
+ large problem.
+ I also spent some time working on planning how I would use my time throughout
+ the duration of the project, using GanttProject software to produce an
+ initial Gantt chart (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:gantt-v1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), for later reference.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Gantt chart - original.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The initial GanttProject-generated Gantt chart for the entire project, showing
+ milestones, tasks and dates on the left, with a graphical representation
+ on the right.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:gantt-v1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
 2018-10-29
 \end_layout
 
 \begin_layout Standard
-This week, I started researching how to determine the user's current location,
- given that it was the first item on my PPF.
+Despite having planned my time out before the project, I found that I hadn't
+ made much headway in the first few weeks of the project - I had explored
+ a few non-specific articles, but I hadn't really managed to put pen to
+ paper.
+ I discussed this with my TA, who agreed that I would produce a series of
+ research presentations, presenting my findings every week to the Engineering
+ staff and the other EPQ students, in order to help me stick to my deadlines.
+\end_layout
+
+\begin_layout Standard
+Using this framework, I started researching how to determine the user's
+ current location, given that it was the first item on my PPF.
  I first looked at examples of prior art (e.g.
  the COEX deployment mentioned in the research section), using this to guide
  my research into what specific technologies were used - for example, some
@@ -176,6 +263,12 @@ This week, I started researching how to determine the user's current location,
  I found the WiFi k-nearest-neighbours approach mentioned in one of the
  papers to be quite hard to understand, and wanted to investigate it and
  the FootPath implementation further.
+\end_layout
+
+\begin_layout Standard
+Generally, I found the framework set by my TA to be very helpful in organizing
+ myself, so I pledged to continue to use it for the remainder of the research
+ section.
 \end_layout
 
 \begin_layout Standard
@@ -372,7 +465,7 @@ Convert the research presentations into a formal report
 \end_layout
 
 \begin_layout Subsubsection
-2018-02-03
+2018-12-03
 \end_layout
 
 \begin_layout Standard
@@ -389,6 +482,15 @@ Looking at my Gantt chart, the next stage of the project was working toward
  However, I found this stage to be inadequately planned, so I resolved to
  make a more detailed plan of what needed to be done in the way of implementatio
 n.
+ In addition, the original Gantt chart assumed that I wouldn't take any
+ break for the Christmas holidays - however, feeling suitably burned out
+ from a hard term's work, I decided that this would probably be unworkable.
+\end_layout
+
+\begin_layout Standard
+In terms of sticking to the Gantt chart more generally, though, I believed
+ that I was mostly on track; the research section had been completed and
+ written up on time, which was promising for the rest of the project.
 \end_layout
 
 \begin_layout Standard
@@ -411,7 +513,74 @@ Make a new Gantt chart to plan the design stages
 Work toward initial designs and implementations
 \end_layout
 
+\begin_layout Subsubsection
+2019-01-02
+\end_layout
+
 \begin_layout Standard
+In order to focus my efforts in the upcoming term, I updated my Gantt chart
+ to reflect my actual progress - namely, the fact that I'd taken a break
+ from the project during the Christmas holidays.
+ I also planned out the stages in front of me with regards to actually designing
+ the project - while the previous Gantt chart simply mentioned 
+\begin_inset Quotes eld
+\end_inset
+
+implement final design
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+write final design
+\begin_inset Quotes erd
+\end_inset
+
+ as action items, the updated version (Figure ) broke these steps down into
+ concrete, actionable parts of the project to work on.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /home/eeeeeta/engineering-epq/gantt/2019-version.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The third revision of the Gantt chart, updated to account for time out during
+ the holidays.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:gantt-v3"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -3266,6 +3435,10 @@ name "fig:accel-testing"
 
 \end_layout
 
+\begin_layout Subsubsection
+Low-pass filter implementation and evaluation
+\end_layout
+
 \begin_layout Standard
 However, the FootPath paper mentioned the necessity for 
 \begin_inset Quotes eld
@@ -3393,7 +3566,7 @@ react-native-svg-charts
 \end_layout
 
 \begin_layout Subsection
-Step sensing
+Step sensing & path matching
 \end_layout
 
 \begin_layout Standard
@@ -3404,10 +3577,21 @@ As previously discussed, a preliminary implementation of FootPath was completed
  the code in any way, although the preliminary implementation used was not
  very optimized; such work could always be done later if performance proved
  to be a real problem).
+ In addition, the FootPath step detection algorithm was also implemented,
+ using the data from the 
+\family typewriter
+react-native-sensors
+\family default
+ API and LPF system described earlier.
+\end_layout
+
+\begin_layout Subsubsection
+Step detection algorithm
 \end_layout
 
 \begin_layout Standard
-The FootPath algorithm has a number of tweakable parameters 
+The step detection algorithm component of FootPath has a number of tweakable
+ parameters 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "link2011footpath"
@@ -3430,6 +3614,288 @@ window_ms
 timeout_ms
 \family default
 ).
+ These were exposed via sliders in a testing application (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:step-detection-screenshot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) that logged the user's steps (logging the acceleration required to trigger
+ the step, as well as the UNIX timestamp of the step), allowing the step
+ detection to be preliminarily evaluated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/eeeeeta/engineering-epq/screenshots/step_detector_testing_2.png
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Screenshot of a step detection testing app, with sliders exposing the relevant
+ adjustable parameters for the step-detection algorithm, as well as the
+ LPF smoothing parameter from earlier app revisions.
+ A list shows the acceleration associated with each detected step, as well
+ as the step's UNIX timestamp; a button is also provided to clear the list
+ of steps.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:step-detection-screenshot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Step detection evaluation
+\end_layout
+
+\begin_layout Standard
+The values specified by the FootPath authors were found to work reasonably
+ well, but often counted steps twice or counted false steps; it was hypothesized
+ that these differences may well be, as the paper says, due to the need
+ to calibrate the parameters, especially for different phones - although
+ the FootPath authors stated that 
+\begin_inset Quotes eld
+\end_inset
+
+they repeated [a step-detection testing] experiment with 15 users and found
+ the parameters to be robust against body heights and walking styles
+\begin_inset Quotes erd
+\end_inset
+
+ (where this 'experiment' is not very detailed, drawing suspicions as to
+ the true reliability of this statement), they also note that 
+\begin_inset Quotes eld
+\end_inset
+
+the parameters...can be calibrated to further improve step detection performance
+ on a per-user basis
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This variability was highlighted as something that needed to be accounted
+ for in the design process later on; while it was possible to adjust the
+ parameters to work reliably on one phone, the accelerometer behaviours
+ for different phones and users may differ, such that incorporating a calibratio
+n step in the app's setup flow might be required to ensure smooth operation.
+ The manner in which the phone was held was also a factor - in preliminary
+ tests, allowing the phone to shake too much while walking logged more steps
+ with the default parameters (requiring a change for accurate readings),
+ whilst attempting to hold the phone relatively still demonstrated good
+ performance with the default parameters - strengthening the need for some
+ sort of calibration step (this jiggling behaviour could be protected against
+ by increasing 
+\family typewriter
+timeout_ms
+\family default
+ - indeed, doing so in tests appeared to fix the erroneous readings).
+\end_layout
+
+\begin_layout Standard
+It was also hoped that the path matching algorithm would provide a layer
+ of protection against erroneous readings as well - although dependent on
+ the exact path chosen: a straight line path would demonstrate zero protection
+ against repeated readings in the correct direction, while a path incorporating
+ frequent turns should refuse to indicate as much progress due to repeated
+ steps.
+ To verify this assumption, and also to proceed further with the project,
+ an implementation of the path matching algorithm was carried out.
+\end_layout
+
+\begin_layout Subsubsection
+Path matching algorithm
+\end_layout
+
+\begin_layout Standard
+To test the path matching algorithm, the step detection testing app was
+ updated to use the JavaScript implementation of the FootPath Best Fit algorithm
+ – however, it could not match steps to a predetermined path yet, as the
+ routing server and navigation graph search system had not yet been completed.
+ To remedy this omission for testing purposes, a system was designed to
+ enable the user to first record a series of steps, then flick a switch
+ and run the Best Fit algorithm against these recorded steps and the user's
+ new steps, giving a position readout.
+ In addition, heading data was added to the detected and recorded steps
+ to make the FootPath implementation work (as this is the data it uses to
+ match up the steps).
+ This system, then, was implemented in a new version of the app (Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:footpath-screenshot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), and some preliminary testing was conducted.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/eeeeeta/engineering-epq/screenshots/footpath_testing.png
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Screenshot of a FootPath testing app.
+ Here, the same controls are exposed as in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:step-detection-screenshot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, in addition to controls that enable the user to enable step detection
+ and step recording, as well as clear the recorded and detected step lists.
+ As before, a list of steps is shown, albeit now with headings; these steps
+ also feed into the 
+\begin_inset Quotes eld
+\end_inset
+
+Pos
+\begin_inset Quotes erd
+\end_inset
+
+ readout, which shows progress along the recorded path according to the
+ FootPath algorithm.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:footpath-screenshot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Path matching evaluation
+\end_layout
+
+\begin_layout Standard
+In simple tests with one tester on one phone walking around a building,
+ the Best Fit algorithm seemed to work rather well in the 
+\begin_inset Quotes eld
+\end_inset
+
+happy path
+\begin_inset Quotes erd
+\end_inset
+
+ case where the tester follows the recorded route pretty much exactly, accuratel
+y reporting their position along the route as they did so.
+ Performance when the tester intentionally deviated from the recorded route
+ was varied - while the algorithm would resume displaying progress accurately
+ if the user returned to the recorded route, the initial deviations could
+ cause the measured position to progress erratically or jump around (for
+ example, if the recorded route was a rectangle, starting by walking backwards
+ instead of forwards caused the app to assume the tester had skipped the
+ first two edges of the rectangle and was walking back toward the start,
+ causing a jump).
+ Repeated steps away from the route, however, would eventually stall the
+ progress indicator, requiring the tester to return to the route in order
+ to obtain any indications of further progress.
+\end_layout
+
+\begin_layout Standard
+Therefore, it was determined that the design of the final application would
+ likely need to incorporate some mechanisms to deal with this erratic behaviour
+ in the case of user error - for example, triggering a warning dialog if
+ the estimated position jumped too significantly (perhaps asking the user
+ to re-input their position).
+ It might also have been the case that the implementation of Best Fit was
+ in some way incorrect.
+ However, the FootPath paper unfortunately provided no test cases to check
+ a new implementation against, making checking for subtle implementation
+ differences rather difficult; the overall behaviour of the algorithm seemed
+ to mirror the descriptions given in the paper 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "link2011footpath"
+literal "false"
+
+\end_inset
+
+ (
+\begin_inset Quotes eld
+\end_inset
+
+Best Fit matches each direction onto the path to where it received the smallest
+ penalty...if the directions match better to a previous position on the path,
+ it will fall back and continue from there
+\begin_inset Quotes erd
+\end_inset
+
+).
+ In addition, there is the issue of compass inaccuracy to contend with;
+ since the steps were recorded on a smartphone with a potentially inaccurate
+ compass, the algorithm may have performed worse than expected.
+\end_layout
+
+\begin_layout Standard
+Since none of these issues seemed to indicate that the step detection /
+ path matching subsystems were fatally flawed (indeed, they raised a number
+ of important design considerations), progress was made on other parts of
+ the project.
 \end_layout
 
 \begin_layout Subsection
@@ -3450,6 +3916,10 @@ Turn-by-turn navigation UI
 
 \begin_layout Subsection
 Starting navigation and place search
+\end_layout
+
+\begin_layout Section
+Evaluation
 \end_layout
 
 \begin_layout Standard
