@@ -2667,6 +2667,14 @@ The first stage of the design process involves defining and justifying what
  should be created to provide the required system? Since there were a number
  of ways in which the project could be structured, I decided to perform
  a brief analysis of which structure the project should use.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:System-structure"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -3899,15 +3907,51 @@ Since none of these issues seemed to indicate that the step detection /
 \end_layout
 
 \begin_layout Subsection
+Routing server & API
+\end_layout
+
+\begin_layout Standard
+As discussed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:System-structure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the project requires two components to be developed: a client-side mobile
+ application, to run on the user's phone, and the routing server, which
+ will expose a defined Application Programming Interface (API) to the client-sid
+e application, through which paths from A to B can be calculated and returned
+ to the client-side app for display to the user.
+ However, there are still a number of design considerations to discuss with
+ regards to exactly how the routing server will be implemented.
+\end_layout
+
+\begin_layout Subsubsection
+Programming languages
+\end_layout
+
+\begin_layout Subsubsection
+Web frameworks
+\end_layout
+
+\begin_layout Subsubsection
+ORMs / databases
+\end_layout
+
+\begin_layout Subsubsection
+API specification
+\end_layout
+
+\begin_layout Subsection
 Map tiles
 \end_layout
 
 \begin_layout Subsection
 Building a navigation graph
-\end_layout
-
-\begin_layout Subsection
-Routing server
 \end_layout
 
 \begin_layout Subsection
