@@ -386,11 +386,20 @@ Make a new, or altered, Gantt chart
 \end_layout
 
 \begin_layout Standard
-This week, I took the time to update my Gantt chart, removing time allocated
- to research real-time sensing (which I deemed to be out of scope for this
- EPQ: making such a system could be another project in and of itself) and
- to preliminary implementations, in order to make more time for researching
- mobile app frameworks and localization.
+This week, I took the time to update my Gantt chart (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:gantt-v2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), removing time allocated to research real-time sensing (which I deemed
+ to be out of scope for this EPQ: making such a system could be another
+ project in and of itself) and to preliminary implementations, in order
+ to make more time for researching mobile app frameworks and localization.
  In doing so, I noticed that the old Gantt chart was rather vague, and took
  steps to rectify this.
 \end_layout
@@ -410,6 +419,48 @@ Action items for next week
 
 \begin_layout Itemize
 Research different graph-search algorithms
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /home/eeeeeta/engineering-epq/gantt/Gantt chart - revision 2.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The second revision of the Gantt chart, with a more realistic and focused
+ research time planning section.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:gantt-v2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -514,7 +565,7 @@ Work toward initial designs and implementations
 \end_layout
 
 \begin_layout Subsubsection
-2019-01-02
+2019-01-07
 \end_layout
 
 \begin_layout Standard
@@ -538,15 +589,25 @@ write final design
 \begin_inset Quotes erd
 \end_inset
 
- as action items, the updated version (Figure ) broke these steps down into
- concrete, actionable parts of the project to work on.
+ as action items, the updated version (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:gantt-v3"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) broke these steps down into concrete, actionable parts of the project
+ to work on.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -581,6 +642,54 @@ name "fig:gantt-v3"
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Subsubsection
+2019-01-14
+\end_layout
+
+\begin_layout Subsubsection
+2019-01-21
+\end_layout
+
+\begin_layout Subsubsection
+2019-01-28
+\end_layout
+
+\begin_layout Subsubsection
+2019-02-03
+\end_layout
+
+\begin_layout Subsubsection
+2019-02-11
+\end_layout
+
+\begin_layout Subsubsection
+2019-02-18
+\end_layout
+
+\begin_layout Subsubsection
+2019-02-25
+\end_layout
+
+\begin_layout Subsubsection
+2019-03-01
+\end_layout
+
+\begin_layout Subsubsection
+2019-03-06
+\end_layout
+
+\begin_layout Subsubsection
+2019-03-13
+\end_layout
+
+\begin_layout Subsubsection
+2019-03-20
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
