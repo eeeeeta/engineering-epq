@@ -689,10 +689,6 @@ name "fig:gantt-v3"
 2019-03-20
 \end_layout
 
-\begin_layout Standard
-
-\end_layout
-
 \begin_layout Section
 Research
 \end_layout
@@ -4041,6 +4037,224 @@ e application, through which paths from A to B can be calculated and returned
 
 \begin_layout Subsubsection
 Programming languages
+\end_layout
+
+\begin_layout Standard
+The question of which programming language to use for a project is not a
+ simple one.
+ With React Native, the choice was made for us (as JavaScript must be used);
+ however, any language could conceivably be used to implement the routing
+ server.
+ An exhaustive list of all popular programming languages and in-depth analysis
+ would be somewhat out of scope for this writeup; furthermore, given the
+ limited time available for this project, it makes sense to use an already
+ familiar language, as the main goal of the project is not to aim to explore
+ new programming languages, but rather to focus on implementing what has
+ been (and will be) designed.
+\end_layout
+
+\begin_layout Standard
+That said, there are also a number of design constraints a programming language
+ would ideally fulfil, in order to meet the needs of this project - namely:
+\end_layout
+
+\begin_layout Itemize
+Fast performance - the program has to be able to run Djikstra's algorithm
+ (or another graph-search algorithm) as fast as possible, with minimal language
+ overhead, to meet the user's performance expectations
+\end_layout
+
+\begin_layout Itemize
+Developer ergonomics - it should be possible to start writing the program
+ with minimal fussing around with the language, as doing so wastes valuable
+ time
+\end_layout
+
+\begin_layout Itemize
+Good support for handling web requests - due to the need for the program
+ to serve an HTTP API to the client component
+\end_layout
+
+\begin_layout Itemize
+Reliability - in order to provide a reliable service to the end-user, the
+ language should provide good support for error handling & management, to
+ avoid unexpected failures
+\end_layout
+
+\begin_layout Paragraph
+Rust
+\end_layout
+
+\begin_layout Standard
+The Rust programming language 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "TrplWebsite"
+literal "false"
+
+\end_inset
+
+ is a relatively new systems programming language, developed by Graydon
+ Hoare and Mozilla Research.
+ It performs rather well according to these criteria:
+\end_layout
+
+\begin_layout Itemize
+Performance - according to the website, Rust is 
+\begin_inset Quotes eld
+\end_inset
+
+blazingly fast and memory-efficient, with no runtime or garbage collector
+\begin_inset Quotes erd
+\end_inset
+
+ to slow it down.
+ Whilst performance measurements are always rather difficult to pin down,
+ and often vary according to use-case, Rust does score highly in benchmarks
+ such as the Computer Language Benchmarks Game 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ClbgRust"
+literal "false"
+
+\end_inset
+
+ (with the fastest submitted program for 5 out of the 10 benchmarks being
+ written in Rust, at the time of writing) and the TechEmpower Web Framework
+ benchmarks 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "TechEmpowerRustJson"
+literal "false"
+
+\end_inset
+
+ (occupying 6th place in the 'JSON serialization test' for the 2018-10-30
+ Round 17 series, for example).
+\end_layout
+
+\begin_layout Itemize
+Developer ergonomics - again, the website boasts of 
+\begin_inset Quotes eld
+\end_inset
+
+great documentation, a friendly compiler with useful error messages, and
+ top-notch tooling
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Given past experience developing projects like osm-signal 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OsmSignal"
+literal "false"
+
+\end_inset
+
+, this is no lie; both the expressiveness of the actual language (including
+ trait-based generics, built-in macro support, and other helpful language
+ features) and the excellent tooling, like the Cargo package manager, make
+ for a pleasant developer experience.
+\end_layout
+
+\begin_layout Itemize
+Web requests - according to 
+\begin_inset Quotes eld
+\end_inset
+
+Are we web yet?
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RustAwwy"
+literal "false"
+
+\end_inset
+
+, a website created to summarize track Rust's progress in the field of web
+ development, Rust is evaluated as being at the 
+\begin_inset Quotes eld
+\end_inset
+
+you can build stuff!
+\begin_inset Quotes erd
+\end_inset
+
+ stage - whilst noting that 
+\begin_inset Quotes eld
+\end_inset
+
+various frameworks enable you to build APIs and backend services quickly
+\begin_inset Quotes erd
+\end_inset
+
+, the website ultimately claims that 
+\begin_inset Quotes eld
+\end_inset
+
+a lot more web-specific needs are still unmet and immature
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Reliability - Rust's website boasts that 
+\begin_inset Quotes eld
+\end_inset
+
+Rust’s rich type system and ownership model guarantee memory-safety and
+ thread-safety
+\begin_inset Quotes erd
+\end_inset
+
+, whilst Rust's strong type system also helps prevent bugs at compile-time.
+ A recent 2017 paper on the topic more formally states that 
+\begin_inset Quotes eld
+\end_inset
+
+Rust's linear type system enables capabilities that cannot be implemented
+ efficiently in traditional languages, but safe and unsafe, and that dramaticall
+y improve security and reliability of system software
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "balasubramanian2017system"
+literal "false"
+
+\end_inset
+
+, while the abstract of a 2015 thesis investigating Rust's unique 
+\emph on
+ownership
+\emph default
+ type system summarizes that 
+\begin_inset Quotes eld
+\end_inset
+
+Rust code is memory-safe by default, faster than C++, easier to maintain,
+ and excels at concurrency
+\begin_inset Quotes erd
+\end_inset
+
+ (claims which are somewhat unsubstantiated, but that do show support for
+ the idea of Rust being memory-safe and therefore reliable).
+\end_layout
+
+\begin_layout Standard
+In addition, Rust benefits from being a rather familiar language, given
+ its ongoing use in other personal projects.
+ This, combined with its near-excellent performance with respect to the
+ identified necessary design constraints, makes it an ideal choice for the
+ server-side component of the project.
 \end_layout
 
 \begin_layout Subsubsection
