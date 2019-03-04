@@ -4047,6 +4047,380 @@ Programming languages
 Web frameworks
 \end_layout
 
+\begin_layout Standard
+Although Rust has already been specified as the programming langauge to
+ use, there are a number of different web framework libraries to choose
+ from.
+\end_layout
+
+\begin_layout Paragraph
+Is a web framework necessary?
+\end_layout
+
+\begin_layout Standard
+Support for handling web requests is not built into Rust; Rust's standard
+ library only exposes the 
+\family typewriter
+std::net
+\family default
+ module, providing 
+\begin_inset Quotes eld
+\end_inset
+
+networking functionality for the Transmission Control and User Datagram
+ Protocols, as well as types for IP and socket addresses
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RustStdNet"
+literal "false"
+
+\end_inset
+
+ - providing the basic 
+\begin_inset Quotes eld
+\end_inset
+
+building blocks
+\begin_inset Quotes erd
+\end_inset
+
+ for higher-level protocols like HTTP, but not incorporating any HTTP request
+ handling into the language.
+\end_layout
+
+\begin_layout Standard
+Writing an HTTP library would be both a rather time-consuming task, and
+ would also be somewhat out of scope for this project; it makes more sense
+ to use somebody else's library.
+ However, the libraries available differ - for example, in expansiveness
+ (i.e.
+ how much the library does for you, and how much you have to do yourself),
+ in ergonomics (i.e.
+ how easy it is to get up and running), and in what versions of Rust are
+ supported by the library.
+ Therefore, a comparison of which library would be best is in order.
+\end_layout
+
+\begin_layout Paragraph
+
+\family typewriter
+hyper
+\end_layout
+
+\begin_layout Standard
+The 
+\family typewriter
+hyper
+\family default
+ library is 
+\begin_inset Quotes eld
+\end_inset
+
+a fast HTTP implementation written in and for Rust
+\begin_inset Quotes erd
+\end_inset
+
+, according to its website - providing 
+\begin_inset Quotes eld
+\end_inset
+
+high concurrency with non-blocking sockets
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is one of the most popular HTTP libraries on 
+\family typewriter
+crates.io
+\family default
+, the Rust package repository, with 3.5 million all-time downloads 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HyperCargo"
+literal "false"
+
+\end_inset
+
+.
+ However, it does use 'futures', a relatively new Rust paradigm for asynchronous
+ computation, making it slightly more complex to make use of.
+\end_layout
+
+\begin_layout Standard
+Furthermore, 
+\family typewriter
+hyper
+\family default
+ is primarily a library focused on the basic primitives that make up the
+ HTTP protocol - it does not implement any 'web framework'-related functionality
+, such as request routing (i.e.
+ matching different URLs to different functions, such that, e.g.
+ 
+\family typewriter
+GET /homepage
+\family default
+ calls 
+\family typewriter
+homepage()
+\family default
+).
+\end_layout
+
+\begin_layout Subparagraph
+Advantages
+\end_layout
+
+\begin_layout Itemize
+Well-established library, under active development, with plenty of dependent
+ crates and downloads
+\end_layout
+
+\begin_layout Itemize
+Provides a strongly-typed API for many HTTP primitives (e.g.
+ headers, error codes)
+\end_layout
+
+\begin_layout Itemize
+Very performant, due to its use of asynchronous primitives and minimal nature
+\end_layout
+
+\begin_layout Itemize
+Relatively minimal; doesn't try and implement much
+\end_layout
+
+\begin_layout Subparagraph
+Disadvantages
+\end_layout
+
+\begin_layout Itemize
+Uses Rust 
+\family typewriter
+Future
+\family default
+s: these are hard to use properly, and, from prior projects, often result
+ in a lot of added complexity / boilerplate.
+ Although Rust 
+\family typewriter
+async/await
+\family default
+ syntax is on the horizon to solve this issue, it is not possible as of
+ the time of writing.
+\end_layout
+
+\begin_layout Itemize
+Relatively minimal, which is a downside for our use-case: we ideally want
+ the web framework to handle as much as possible, in order to concentrate
+ our efforts on application logic
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Spending time writing our own request router - or even finding/gluing together
+ other libraries in order to use someone else's - doesn't seem like a very
+ good use of time.
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+
+\family typewriter
+rouille
+\end_layout
+
+\begin_layout Standard
+The 
+\family typewriter
+rouille
+\family default
+ library 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RouilleCargo"
+literal "false"
+
+\end_inset
+
+ describes itself as 
+\begin_inset Quotes eld
+\end_inset
+
+a micro-web-framework library
+\begin_inset Quotes erd
+\end_inset
+
+, that was 
+\begin_inset Quotes eld
+\end_inset
+
+designed to be intuitive to use if you know Rust
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Its documentation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RouilleDocs"
+literal "false"
+
+\end_inset
+
+ further claims that 
+\begin_inset Quotes eld
+\end_inset
+
+the rouille library is very easy to get started with
+\begin_inset Quotes erd
+\end_inset
+
+, providing a straightforward 5-line 
+\begin_inset Quotes eld
+\end_inset
+
+hello world
+\begin_inset Quotes erd
+\end_inset
+
+ example.
+\end_layout
+
+\begin_layout Standard
+Essentially, 
+\family typewriter
+rouille
+\family default
+ is a step between bare-bones HTTP libraries like 
+\family typewriter
+hyper
+\family default
+ and fully-fledged web 
+\emph on
+frameworks
+\emph default
+ like 
+\family typewriter
+rocket
+\family default
+; providing a basic set of higher-level tools that can be used to construct
+ a web application, without dictating too much about how the application
+ is actually built.
+ Indeed, reading 
+\family typewriter
+rouille
+\family default
+'s README, it is stated that 
+\begin_inset Quotes eld
+\end_inset
+
+concepts closely related to websites (like cookies, CGI, form input, etc.)
+ are directly supported by rouille
+\begin_inset Quotes erd
+\end_inset
+
+, while 
+\begin_inset Quotes eld
+\end_inset
+
+more general concepts (like database handling or templating) are not directly
+ handled
+\begin_inset Quotes erd
+\end_inset
+
+ - essentially, describing what a so-called 
+\begin_inset Quotes eld
+\end_inset
+
+micro-web-framework
+\begin_inset Quotes erd
+\end_inset
+
+ library entails.
+\end_layout
+
+\begin_layout Subparagraph
+Advantages
+\end_layout
+
+\begin_layout Itemize
+Optimized for ease of use - unlike 
+\family typewriter
+hyper
+\family default
+, 
+\family typewriter
+rouille
+\family default
+'s programming model entails 
+\begin_inset Quotes eld
+\end_inset
+
+write a (synchronous) function that processes HTTP requests
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Built in functionality, like the 
+\family typewriter
+router!
+\family default
+ macro, to provide common functions like request routing, static file serving,
+ HTML form parsing, etc.
+ that might be required by a web server application, making development
+ easier
+\end_layout
+
+\begin_layout Subparagraph
+Disadvantages
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Slightly
+\emph default
+ less performant than pure asynchronous code (although likely not by much)
+\end_layout
+
+\begin_layout Itemize
+Wouldn't be able to handle large amounts of concurrent connections - i.e.
+ doesn't solve the so-called 
+\begin_inset Quotes eld
+\end_inset
+
+C10K problem
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "C10K"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+
+\family typewriter
+rocket
+\end_layout
+
+\begin_layout Paragraph
+
+\family typewriter
+gotham
+\end_layout
+
 \begin_layout Subsubsection
 ORMs / databases
 \end_layout
