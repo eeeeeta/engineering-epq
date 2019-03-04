@@ -1,0 +1,17 @@
+[package]
+authors = ["eeeeeta <eeeeeta@users.noreply.github.com>"]
+edition = "2018"
+name = "routing-server"
+version = "0.1.0"
+
+[dependencies]
+dotenv = "0.9"
+rocket = "0.4"
+
+[dependencies.diesel]
+features = ["postgres"]
+version = "1.4"
+
+[dependencies.rocket_contrib]
+version = "0.4"
+features = ["json", "serve", "diesel_postgres_pool"]
