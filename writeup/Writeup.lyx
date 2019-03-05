@@ -4262,7 +4262,7 @@ Web frameworks
 \end_layout
 
 \begin_layout Standard
-Although Rust has already been specified as the programming langauge to
+Although Rust has already been specified as the programming language to
  use, there are a number of different web framework libraries to choose
  from.
 \end_layout
@@ -4629,10 +4629,221 @@ literal "false"
 rocket
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Standard
+Rocket is 
+\begin_inset Quotes eld
+\end_inset
 
+a web framework for Rust that makes it simple to write fast, secure web
+ applications without sacrificing flexibility, usability, or type safety
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RocketRs"
+literal "false"
+
+\end_inset
+
+.
+ Unlike any of the other libraries discussed thus far, 
 \family typewriter
-gotham
+rocket
+\family default
+ is an actual web 
+\emph on
+framework
+\emph default
+ - its companion library 
+\family typewriter
+rocket_contrib
+\family default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RocketContribDocs"
+literal "false"
+
+\end_inset
+
+ provides support for commonly needed features, such as JSON support, static
+ file serving, templating, and database pools; out of these three libraries
+ considered, 
+\family typewriter
+rocket
+\family default
+ has the greatest amount of built-in functionality.
+\end_layout
+
+\begin_layout Subparagraph
+Advantages
+\end_layout
+
+\begin_layout Itemize
+Very easy to use: 
+\family typewriter
+rocket
+\family default
+'s procedural macros and type safety make writing request handlers as easy
+ as simply writing a Rust function and decorating it with, e.g.
+ 
+\family typewriter
+#[get(
+\begin_inset Quotes eld
+\end_inset
+
+/route
+\begin_inset Quotes erd
+\end_inset
+
+)]
+\family default
+ to signify how it should be accessible in the context of the application.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+This is in contrast to other non-macro-enabled web frameworks, which require
+ a lot more boilerplate.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Built-in support for database connections, cookies, templating, and serializatio
+n - i.e.
+ most of the standard tools required to build a web application are built
+ into 
+\family typewriter
+rocket
+\family default
+ or 
+\family typewriter
+rocket_contrib
+\family default
+ and integrate with the rest of the framework
+\end_layout
+
+\begin_layout Itemize
+Synchronous programming model that's easy to reason about and far more ergonomic
+ than asynchronous futures
+\end_layout
+
+\begin_layout Itemize
+Security considerations are built into the framework, with functionality
+ such as request guards and string validation/sanitizing (via the 
+\family typewriter
+RawStr
+\family default
+ type).
+\end_layout
+
+\begin_layout Subparagraph
+Disadvantages
+\end_layout
+
+\begin_layout Itemize
+As with 
+\family typewriter
+rouille
+\family default
+, probably slightly less performant than pure asynchronous code.
+\end_layout
+
+\begin_layout Itemize
+As with 
+\family typewriter
+rouille
+\family default
+, also potentially vulnerable to the C10k problem.
+\end_layout
+
+\begin_layout Itemize
+Using a big web framework means committing to that web framework's way of
+ doing things; if the framework doesn't provide a way to do something, or
+ to add on an extension to make something possible, it cannot be done!
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+That said, 
+\family typewriter
+rocket
+\family default
+ does have good support for attaching custom modules (called 'fairings')
+ to provide add-on pieces of functionality.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Rocket requires the use of nightly Rust, making maintaining a Rocket app
+ harder: the Rust nightly toolchain must always be updated in lockstep with
+ the version of Rocket, as changes in the nightly Rust compiler mandate
+ changes in Rocket
+\end_layout
+
+\begin_layout Paragraph
+Evaluation
+\end_layout
+
+\begin_layout Standard
+As previously discussed, it seems as if using any asynchronous library would
+ be the wrong choice for this project; while asynchronous programming can
+ squeeze out extra performance and handle vast amounts of concurrent connections
+, synchronous frameworks still manage to perform very well using plain OS
+ threads, while making things vastly easier for the developer to reason
+ about.
+ Therefore, 
+\family typewriter
+hyper
+\family default
+ was ruled out as a choice for this project, as well as any other asynchronous
+ Rust libraries.
+\end_layout
+
+\begin_layout Standard
+As also previously discussed, it is also advantageous to focus on implementing
+ the core 'business logic' of the server-side component; while smaller microfram
+eworks like 
+\family typewriter
+rouille
+\family default
+ may result in a small increase in portability (e.g.
+ greater ease of moving between libraries), the time that would be spent
+ writing boilerplate code to get them working is time that could, and arguably
+ should, be concentrated on the graph-search implementation, and other applicati
+on-specific logic.
+ A large web framework, like 
+\family typewriter
+rocket
+\family default
+, which reduces boilerplate and makes it easy to concentrate on this logic
+ (handling all of the web-related tasks as much as possible), is therefore
+ the best choice for this project - and, indeed, 
+\family typewriter
+rocket
+\family default
+ seems to be the most eminent framework of this class available in the Rust
+ ecosystem, with over 186 thousand downloads at the time of writing.
+ Although choosing 
+\family typewriter
+rocket
+\family default
+ might make longer-term maintenance of the project 
+\emph on
+slightly
+\emph default
+ harder, due to its dependency on nightly Rust and simply as it's an opinionated
+ web framework (meaning your code becomes highly dependent on using that
+ framework and no other one), this is not that much of an issue; since the
+ application is mostly focused on implementing an API (a fairly straightforward
+ task in any framework), it should be simple to port it to other web frameworks
+ in the future, if the need arises.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Subsubsection
