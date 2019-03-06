@@ -4268,11 +4268,29 @@ Although Rust has already been specified as the programming language to
 \end_layout
 
 \begin_layout Paragraph
-Is a web framework necessary?
+What is a web framework library, and is one necessary?
 \end_layout
 
 \begin_layout Standard
-Support for handling web requests is not built into Rust; Rust's standard
+A 
+\emph on
+web framework library
+\emph default
+ provides a set of tools to enable a developer to build a web application.
+ At the most basic level, web frameworks have to be able to speak HTTP (the
+ Hypertext Transfer Protocol), the protocol used by web servers and browsers
+ to transmit web pages; however, nearly all web frameworks provide additional
+ functionality on top of mere HTTP interpretation, adding functionality
+ like request routing (i.e.
+ determining which parts of the webpage should be routed to which parts
+ of code), support for JSON (a common serialization protocol for data),
+ support for connection to databases, and more - all of which can be useful
+ to increase ease of development and iteration, although using a web framework
+ can incur a performance cost in some cases.
+\end_layout
+
+\begin_layout Standard
+Support for handling HTTP web requests is not built into Rust; Rust's standard
  library only exposes the 
 \family typewriter
 std::net
@@ -4310,7 +4328,10 @@ building blocks
 Writing an HTTP library would be both a rather time-consuming task, and
  would also be somewhat out of scope for this project; it makes more sense
  to use somebody else's library.
- However, the libraries available differ - for example, in expansiveness
+\end_layout
+
+\begin_layout Standard
+However, the libraries available differ - for example, in expansiveness
  (i.e.
  how much the library does for you, and how much you have to do yourself),
  in ergonomics (i.e.
@@ -4842,16 +4863,180 @@ slightly
  in the future, if the need arises.
 \end_layout
 
-\begin_layout Standard
-
-\end_layout
-
 \begin_layout Subsubsection
 ORMs / databases
 \end_layout
 
+\begin_layout Paragraph
+Is a database necessary?
+\end_layout
+
+\begin_layout Paragraph
+PostgreSQL
+\end_layout
+
+\begin_layout Paragraph
+MySQL
+\end_layout
+
+\begin_layout Paragraph
+SQLite
+\end_layout
+
+\begin_layout Paragraph
+Is an ORM necessary?
+\end_layout
+
+\begin_layout Paragraph
+
+\family typewriter
+diesel
+\end_layout
+
+\begin_layout Paragraph
+Evaluation
+\end_layout
+
 \begin_layout Subsubsection
 API specification
+\end_layout
+
+\begin_layout Standard
+While the libraries and tools used to build the server-side component have
+ now been specified, defining how the server-side component will interact
+ with the client-side component is also necessary.
+ In other words, the 
+\emph on
+application programming interface
+\emph default
+ (API) needs to be defined.
+\end_layout
+
+\begin_layout Paragraph
+What is an API?
+\end_layout
+
+\begin_layout Standard
+An API is defined as an agreed-upon specification for how two pieces of
+ software interact - admittedly a rather broad definition! For the purposes
+ of this project, the term API refers to a list of available 
+\emph on
+endpoints
+\emph default
+ (i.e.
+
+\emph on
+ 
+\emph default
+resources that the client-side component can ask for, or submit data through)
+ that the server-side component will expose to the client-side component,
+ using HTTP (the underlying protocol of the web) to do so.
+\end_layout
+
+\begin_layout Standard
+An API could conceivably be structured in many different ways - for example,
+ it could be stateful (where the server-side component stores some contextual
+ information about each client between requests), or stateless (where no
+ such information is stored, and every new request must provide all infromation
+ necessary to service the request); it could be strictly defined by a given
+ protocol (such as web services based on 'heavyweight' protocols, like SOAP
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SoapW3C"
+literal "false"
+
+\end_inset
+
+), or loosely defined based on a set of architectural ideas and standards
+ (such as JSON 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JsonOrg"
+literal "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Paragraph
+Representational State Transfer (REST)s
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Representational State Transfer
+\series default
+ (REST), presented by Fielding in a 2000 doctoral dissertation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fielding2000architectural"
+literal "false"
+
+\end_inset
+
+, is one such architectural style for API building, commonly linked to HTTP
+ and its builtin operations ('methods', e.g.
+ 
+\family typewriter
+GET
+\family default
+, 
+\family typewriter
+HEAD
+\family default
+, 
+\family typewriter
+POST
+\family default
+, 
+\family typewriter
+PUT
+\family default
+, etc.).
+ Its architectural constraints, as identified by Paustasso et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pautasso2014"
+literal "false"
+
+\end_inset
+
+, include:
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+addressability
+\emph default
+ - the idea that 
+\begin_inset Quotes eld
+\end_inset
+
+all resources...should be given a unqiue and stable identifier
+\begin_inset Quotes erd
+\end_inset
+
+, usually a URI (Uniform Resource Identifier);
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+uniform interface
+\emph default
+ - the idea of using a common protocol like HTTP, with its uniform methods
+ (GET, POST...) that can be applied to all resource identifiers;
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+stateless interactions
 \end_layout
 
 \begin_layout Subsection
