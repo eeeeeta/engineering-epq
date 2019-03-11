@@ -4871,6 +4871,16 @@ ORMs / databases
 Is a database necessary?
 \end_layout
 
+\begin_layout Standard
+A database is a separate component of many server-side applications that
+ handles the organization and storage of the application's data.
+ Since handling data storage is out of scope for most applications - which
+ wish to be able to store data and retrieve it, but don't wish to deal with
+ the precise details of where the data is stored, or how to retrieve it
+ performantly - most (non-trivial) applications choose to use a database
+ of some kind.
+\end_layout
+
 \begin_layout Paragraph
 PostgreSQL
 \end_layout
@@ -4884,6 +4894,14 @@ SQLite
 \end_layout
 
 \begin_layout Paragraph
+Graph databases
+\end_layout
+
+\begin_layout Paragraph
+Evaluation: databases
+\end_layout
+
+\begin_layout Paragraph
 Is an ORM necessary?
 \end_layout
 
@@ -4891,10 +4909,6 @@ Is an ORM necessary?
 
 \family typewriter
 diesel
-\end_layout
-
-\begin_layout Paragraph
-Evaluation
 \end_layout
 
 \begin_layout Subsubsection
