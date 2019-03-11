@@ -4961,7 +4961,7 @@ literal "false"
 \end_layout
 
 \begin_layout Paragraph
-Representational State Transfer (REST)s
+Representational State Transfer (REST)
 \end_layout
 
 \begin_layout Standard
@@ -5037,6 +5037,86 @@ uniform interface
 
 \emph on
 stateless interactions
+\emph default
+ - all interactions (i.e.
+ requests) are independent of each other, and no state is stored between
+ them; each new request must provide all necessary resources required to
+ complete the request
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+self-describing messages
+\emph default
+ - requests and responses should include 
+\begin_inset Quotes erd
+\end_inset
+
+implicit meta-data
+\begin_inset Quotes erd
+\end_inset
+
+ about the representation of the message, such that parties do not need
+ to agree how the representation should be parsed out-of-band
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+hypermedia
+\emph default
+ - resources 
+\begin_inset Quotes eld
+\end_inset
+
+may be related to each other
+\begin_inset Quotes erd
+\end_inset
+
+, and may enclude embedded references to other resources
+\end_layout
+
+\begin_layout Standard
+According to Pautasso et al., the Web at large's adoption the REST design
+ patterns has resulted in the development of 
+\begin_inset Quotes eld
+\end_inset
+
+highly scalable, decentralized and loosely coupled distributed systems
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is perhaps quite easy to see why this is the case: by adopting a standardise
+d protocol (HTTP) and common set of operations (GET, POST, PUT, DELETE,
+ etc.) - as well as the 
+\emph on
+stateless interactions
+\emph default
+ idea, allowing requests to be handled independent of each other - application
+ complexity can be vastly reduced, while opening up a myriad of possibilities
+ for how requests can be handled, due to statelessness.
+ In the context of this project, for example, the stateless nature of REST
+ would enable the server-side component to be split up into a number of
+ scalable microservices and distributed across multiple redundant hosts,
+ should the need arise for such a setup - while other more stateful protocols
+ would hamper the development of such an architecture.
+ Furthermore, the popularity of REST means that all of the web framework
+ tooling chosen earlier - 
+\family typewriter
+rocket
+\family default
+, and, indeed, the wider JavaScript ecosystem that React Native makes use
+ of - lends itself to the paradigm, making it easier to write RESTful APIs
+ with this tooling.
+\end_layout
+
+\begin_layout Standard
+Therefore, REST seems like the best API paradigm to employ for this project.
+ However, it is still necessary to specify what RESTful resources the server-sid
+e component will offer, in order to enable orderly interaction between the
+ two components.
 \end_layout
 
 \begin_layout Subsection
