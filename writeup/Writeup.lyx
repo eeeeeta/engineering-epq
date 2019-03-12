@@ -4881,6 +4881,120 @@ A database is a separate component of many server-side applications that
  of some kind.
 \end_layout
 
+\begin_layout Standard
+However, there are different kinds of database available, as well as different
+ software offerings for each kind.
+ Most applications use a 
+\emph on
+relational database management system
+\emph default
+ (RDBMS) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DbEnginesRanking"
+literal "false"
+
+\end_inset
+
+ - using Edgar F.
+ Codds' 
+\emph on
+relational model 
+\emph default
+for database management.
+ Such databases store data in
+\emph on
+ tables 
+\emph default
+(which have defined rows and columns), and usually employ the Structured
+ Query Language (SQL) as a mostly-standardised interface for querying and
+ returning data.
+ However, there are also so-called 
+\emph on
+NoSQL
+\emph default
+ databases (which do not use SQL, and have a different data model), like
+ Redis 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RedisIo"
+literal "false"
+
+\end_inset
+
+ - an 
+\begin_inset Quotes eld
+\end_inset
+
+in-memory data structure store
+\begin_inset Quotes erd
+\end_inset
+
+, and MongoDB 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WhatIsMongo"
+literal "false"
+
+\end_inset
+
+, a 
+\begin_inset Quotes eld
+\end_inset
+
+document database
+\begin_inset Quotes erd
+\end_inset
+
+ that 
+\begin_inset Quotes eld
+\end_inset
+
+stores data in flexible, JSON-like documents
+\begin_inset Quotes erd
+\end_inset
+
+ to be considered.
+\end_layout
+
+\begin_layout Standard
+For the purposes of the server-side component, the database needs to be
+ able to store the contents of our navigation graph (q.v.), efficiently querying
+ through it in order to return a result to the user as fast as possible.
+ As with the choice of language and framework, reliability and developer
+ ergonomics are also design goals here.
+\end_layout
+
+\begin_layout Paragraph
+Proprietary databases
+\end_layout
+
+\begin_layout Standard
+Several of the top places on the DB-Engines ranking of database popularity
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DbEnginesRanking"
+literal "false"
+
+\end_inset
+
+ - such as Oracle (1st), Microsoft SQL Server (3rd), and IBM Db2 (6th) -
+ are 
+\emph on
+proprietary 
+\emph default
+- i.e.
+ they are not freely available to download and run.
+ Although their popularity may be higher, choosing a non-free database for
+ this project would likely be a very bad idea, both given the limited budget
+ (essentially zero) available, and given the fact that, as primarily a proof-of-
+concept, the potential gain in performance or capability as a result of
+ using a non-free database would be dwarfed by the fact that nobody else
+ would be able to easily run or adapt the project's code, were it to be
+ highly reliant on a proprietary database.
+\end_layout
+
 \begin_layout Paragraph
 PostgreSQL
 \end_layout
@@ -4890,11 +5004,7 @@ MySQL
 \end_layout
 
 \begin_layout Paragraph
-SQLite
-\end_layout
-
-\begin_layout Paragraph
-Graph databases
+NoSQL databases
 \end_layout
 
 \begin_layout Paragraph
